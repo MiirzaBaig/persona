@@ -12,7 +12,6 @@ interface PageProps {}
 const Page = ({}: PageProps) => {
   const [isTLDRShown, setIsTLDRShown] = useState(false);
   const [isHoveringOverTrud, setIsHoveringOverTrud] = useState(false);
-  const [isHoveringOverTrud, setIsHoveringOverTrud] = useState(false);
   const [isHoveringOverVolya, setIsHoveringOverVolya] = useState(false);
 
   return (
