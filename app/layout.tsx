@@ -4,6 +4,7 @@ import { GeistMono } from "geist/font/mono";
 import "./globals.css";
 import Footer from "@/components/footer";
 import Nav from "@/components/nav";
+import ViewCounter from "@/components/view-counter";
 import { Analytics } from "@vercel/analytics/react"
 import ogImage from "./opengraph-image.png";
 
@@ -36,6 +37,7 @@ export default async function RootLayout({
         <Nav/>
         {children}
         <Footer />
+        <ViewCounter />
         <Analytics />
       </body>
     </html>
