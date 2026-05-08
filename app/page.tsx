@@ -44,7 +44,7 @@ const projects = [
   {
     name: "Tokamak Chain Monitor",
     type: "Observability",
-    href: "https://chain-monitor.vercel.app",
+    href: "https://tokamak-chain-monitor.vercel.app/chains",
     line: "L2 monitoring dashboard with live chain health, fee trends, fallback RPCs, and PDF reporting.",
     stack: ["Next.js 15", "Viem", "TanStack Query", "Tailwind"],
   },
@@ -58,14 +58,14 @@ const projects = [
   {
     name: "SolTerminal",
     type: "DeFi",
-    href: "https://solterminal.vercel.app",
+    href: "https://sol-terminal-six.vercel.app/",
     line: "Trading terminal with wallet flows, market data, pre-trade analytics, and portfolio views.",
     stack: ["Next.js", "Solana", "Tailwind"],
   },
   {
     name: "Mathly",
     type: "Education",
-    href: "https://github.com/MiirzaBaig/mathly",
+    href: "https://mathy-sigma.vercel.app/",
     line: "Math practice platform with adaptive problems, progress tracking, and a clean student UI.",
     stack: ["Next.js", "TypeScript", "React"],
   },
@@ -278,11 +278,11 @@ function SectionTitle({
       <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.24em] text-blue-600 dark:text-blue-400">
         {label}
       </p>
-      <h2 className="mt-3 text-balance text-4xl font-semibold tracking-[-0.035em] text-zinc-950 dark:text-white md:text-6xl">
+      <h2 className="mt-3 text-balance text-3xl font-semibold tracking-[-0.035em] text-zinc-950 dark:text-white sm:text-4xl md:text-6xl">
         {title}
       </h2>
       {copy ? (
-        <p className="mx-auto mt-5 max-w-2xl text-pretty text-base leading-7 text-zinc-600 dark:text-zinc-400 md:text-lg">
+        <p className="mx-auto mt-4 max-w-2xl text-pretty text-sm leading-6 text-zinc-600 dark:text-zinc-400 sm:mt-5 sm:text-base sm:leading-7 md:text-lg">
           {copy}
         </p>
       ) : null}
@@ -316,21 +316,21 @@ function SkillToken({
         ease: [0.22, 1, 0.36, 1],
       }}
       whileHover={{ y: -4, scale: 1.02 }}
-      className="group inline-flex items-center gap-3 rounded-full border border-zinc-200 bg-white/82 px-3.5 py-2.5 shadow-[0_16px_50px_rgba(15,23,42,0.05)] backdrop-blur transition-colors hover:border-zinc-300 hover:bg-white dark:border-zinc-800 dark:bg-zinc-950/82 dark:hover:border-zinc-700"
+      className="group inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white/82 px-2.5 py-2 shadow-[0_16px_50px_rgba(15,23,42,0.05)] backdrop-blur transition-colors hover:border-zinc-300 hover:bg-white dark:border-zinc-800 dark:bg-zinc-950/82 dark:hover:border-zinc-700 sm:gap-3 sm:px-3.5 sm:py-2.5"
     >
-      <span className="flex size-9 items-center justify-center rounded-full bg-zinc-100 text-[11px] font-bold tracking-[-0.02em] text-zinc-700 transition group-hover:bg-blue-50 group-hover:text-blue-700 dark:bg-zinc-900 dark:text-zinc-300 dark:group-hover:bg-blue-950/50 dark:group-hover:text-blue-300">
+      <span className="flex size-7 items-center justify-center rounded-full bg-zinc-100 text-[10px] font-bold tracking-[-0.02em] text-zinc-700 transition group-hover:bg-blue-50 group-hover:text-blue-700 dark:bg-zinc-900 dark:text-zinc-300 dark:group-hover:bg-blue-950/50 dark:group-hover:text-blue-300 sm:size-9 sm:text-[11px]">
         {item.icon ? (
           <img
             src={item.icon}
             alt=""
-            className={`size-5 object-contain ${item.invertOnDark ? "dark:invert" : ""}`}
+            className={`size-4 object-contain sm:size-5 ${item.invertOnDark ? "dark:invert" : ""}`}
             loading="lazy"
           />
         ) : (
           item.fallback ?? item.name.slice(0, 2)
         )}
       </span>
-      <span className="whitespace-nowrap text-sm font-semibold tracking-[-0.01em] text-zinc-800 dark:text-zinc-200">
+      <span className="whitespace-nowrap text-xs font-semibold tracking-[-0.01em] text-zinc-800 dark:text-zinc-200 sm:text-sm">
         {item.name}
       </span>
     </motion.div>
@@ -357,7 +357,7 @@ export default function Home() {
         <HeroThree />
         <motion.div
           style={{ opacity: heroOpacity, y: heroY }}
-          className="relative z-10 mx-auto flex w-full max-w-6xl px-6 pb-16 pt-8"
+          className="relative z-10 mx-auto flex w-full max-w-6xl px-4 pb-10 pt-4 sm:px-6 sm:pb-16 sm:pt-8"
         >
           <div className="max-w-3xl">
             <motion.div
@@ -378,7 +378,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.08 }}
-              className="font-mono text-[11px] font-semibold uppercase tracking-[0.26em] text-blue-600 dark:text-blue-400"
+              className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400 sm:text-[11px] sm:tracking-[0.26em]"
             >
               agentic engineer · web3 builder · product systems
             </motion.p>
@@ -387,13 +387,13 @@ export default function Home() {
               initial={{ opacity: 0, y: 18, filter: "blur(8px)" }}
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               transition={{ duration: 0.7, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
-              className="mt-5 max-w-5xl text-6xl font-semibold leading-[0.9] tracking-[-0.065em] text-zinc-950 dark:text-white md:text-8xl lg:text-9xl"
+              className="mt-5 max-w-5xl text-[2.75rem] font-semibold leading-[0.9] tracking-[-0.065em] text-zinc-950 dark:text-white sm:text-6xl md:text-8xl lg:text-9xl"
             >
               Mirza builds
               <span className="block text-zinc-400 dark:text-zinc-600">what ships.</span>
             </motion.h1>
 
-            <div className="mt-7 h-10 overflow-hidden md:h-12">
+            <div className="mt-5 h-8 overflow-hidden sm:mt-7 sm:h-10 md:h-12">
               <AnimatePresence mode="wait">
                 <motion.p
                   key={headline}
@@ -401,7 +401,7 @@ export default function Home() {
                   animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                   exit={{ opacity: 0, y: -22, filter: "blur(8px)" }}
                   transition={{ duration: 0.45, ease: "easeOut" }}
-                  className="text-2xl font-semibold tracking-[-0.04em] text-zinc-800 dark:text-zinc-200 md:text-4xl"
+                  className="text-lg font-semibold tracking-[-0.04em] text-zinc-800 dark:text-zinc-200 sm:text-2xl md:text-4xl"
                 >
                   {headline}
                 </motion.p>
@@ -412,7 +412,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.24 }}
-              className="mt-7 max-w-2xl text-pretty text-base leading-8 text-zinc-600 dark:text-zinc-400 md:text-lg"
+              className="mt-5 max-w-2xl text-pretty text-sm leading-7 text-zinc-600 dark:text-zinc-400 sm:mt-7 sm:text-base sm:leading-8 md:text-lg"
             >
               I build the product layer, the backend layer, and the messy middle. Agents help me move fast; taste and review keep it clean.
             </motion.p>
@@ -421,7 +421,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.32 }}
-              className="mt-9 flex flex-col gap-3 sm:flex-row"
+              className="mt-7 flex flex-col gap-3 sm:mt-9 sm:flex-row"
             >
               <a
                 href={`mailto:${profile.email}`}
@@ -442,7 +442,7 @@ export default function Home() {
         </motion.div>
       </section>
 
-      <section id="projects" className="px-6 py-20 md:py-28">
+      <section id="projects" className="px-4 py-14 sm:px-6 md:py-28">
         <div className="mx-auto max-w-6xl">
           <SectionTitle
             label="selected work"
@@ -457,13 +457,13 @@ export default function Home() {
                   href={project.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group grid gap-5 rounded-[1.75rem] border border-zinc-200 bg-white p-5 transition duration-300 hover:-translate-y-1 hover:border-zinc-400 hover:shadow-[0_24px_80px_rgba(15,23,42,0.08)] dark:border-zinc-800 dark:bg-zinc-950 dark:hover:border-zinc-600 md:grid-cols-[0.34fr_0.66fr]"
+                  className="group grid gap-3 rounded-[1.25rem] border border-zinc-200 bg-white p-4 transition duration-300 hover:-translate-y-1 hover:border-zinc-400 hover:shadow-[0_24px_80px_rgba(15,23,42,0.08)] dark:border-zinc-800 dark:bg-zinc-950 dark:hover:border-zinc-600 sm:gap-5 sm:rounded-[1.75rem] sm:p-5 md:grid-cols-[0.34fr_0.66fr]"
                 >
                   <div>
                     <p className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-600 dark:text-blue-400">
                       {project.type}
                     </p>
-                    <h3 className="mt-3 text-2xl font-semibold tracking-tight text-zinc-950 dark:text-white">
+                    <h3 className="mt-1.5 text-xl font-semibold tracking-tight text-zinc-950 dark:text-white sm:mt-3 sm:text-2xl">
                       {project.name}
                     </h3>
                   </div>
@@ -490,7 +490,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="experience" className="border-y border-zinc-200 bg-white px-6 py-20 dark:border-zinc-900 dark:bg-[#0b0d12] md:py-28">
+      <section id="experience" className="border-y border-zinc-200 bg-white px-4 py-14 dark:border-zinc-900 dark:bg-[#0b0d12] sm:px-6 md:py-28">
         <div className="mx-auto max-w-6xl">
           <SectionTitle
             label="timeline"
@@ -529,7 +529,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="stack" className="px-6 py-20 md:py-28">
+      <section id="stack" className="px-4 py-14 sm:px-6 md:py-28">
         <div className="mx-auto max-w-6xl">
           <SectionTitle
             label="toolbox"
@@ -540,7 +540,7 @@ export default function Home() {
           <div className="space-y-8">
             {stack.map((group, groupIndex) => (
               <FadeIn key={group.category} delay={groupIndex * 0.04}>
-                <div className="flex flex-col gap-4 rounded-[2rem] border border-zinc-200 bg-white/64 p-4 backdrop-blur dark:border-zinc-800 dark:bg-zinc-950/56 md:flex-row md:items-center">
+                <div className="flex flex-col gap-3 rounded-[1.25rem] border border-zinc-200 bg-white/64 p-3 backdrop-blur dark:border-zinc-800 dark:bg-zinc-950/56 sm:gap-4 sm:rounded-[2rem] sm:p-4 md:flex-row md:items-center">
                   <div className="flex min-w-32 items-center gap-3 md:w-36">
                     <span className="h-px w-8 bg-blue-600 dark:bg-blue-400" />
                     <h3 className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-zinc-500 dark:text-zinc-500">
@@ -563,15 +563,15 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="px-6 pb-10 md:pb-14">
+      <section className="px-4 pb-10 sm:px-6 md:pb-14">
         <FadeIn>
-          <div className="mx-auto max-w-6xl rounded-[2rem] bg-zinc-950 p-7 text-white dark:bg-white dark:text-zinc-950 md:p-10">
+          <div className="mx-auto max-w-6xl rounded-[1.25rem] bg-zinc-950 p-5 text-white dark:bg-white dark:text-zinc-950 sm:rounded-[2rem] sm:p-7 md:p-10">
             <div className="grid gap-8 md:grid-cols-[1fr_auto] md:items-end">
               <div>
                 <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-300 dark:text-blue-700">
                   available for the right team
                 </p>
-                <h2 className="mt-4 max-w-3xl text-4xl font-semibold tracking-tight md:text-6xl">
+                <h2 className="mt-4 max-w-3xl text-2xl font-semibold tracking-tight sm:text-4xl md:text-6xl">
                   Need someone who can build and care?
                 </h2>
                 <p className="mt-5 max-w-2xl text-base leading-7 text-zinc-300 dark:text-zinc-700">
