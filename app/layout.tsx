@@ -28,7 +28,22 @@ export const metadata: Metadata = {
       "Polished web products, production backends, payment flows, and data-heavy dashboards.",
     url: "https://persona-t82m.vercel.app",
     siteName: "Mirza Baig",
+    images: [
+      {
+        url: "/opengraph-image.png",
+        width: 1681,
+        height: 936,
+        alt: "Mirza Baig Open Graph image",
+      },
+    ],
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Mirza Baig — Full-Stack Engineer",
+    description:
+      "Polished web products, production backends, payment flows, and data-heavy dashboards.",
+    images: ["/opengraph-image.png"],
   },
 };
 
