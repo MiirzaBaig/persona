@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     siteName: "Mirza Baig",
     images: [
       {
-        url: "/opengraph-image.png",
+        url: "/opengraph-image-v2.png",
         width: 1681,
         height: 936,
         alt: "Mirza Baig Open Graph image",
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     title: "Mirza Baig — Full-Stack Engineer",
     description:
       "Polished web products, production backends, payment flows, and data-heavy dashboards.",
-    images: ["/opengraph-image.png"],
+    images: ["/opengraph-image-v2.png"],
   },
 };
 
