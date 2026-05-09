@@ -16,6 +16,7 @@ const Nav = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { theme, toggleTheme, mounted } = useTheme();
+  const isDark = mounted && theme === "dark";
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 24);
@@ -34,9 +35,11 @@ const Nav = () => {
         className="fixed inset-x-0 top-4 z-50 px-4"
       >
         <div
-          className={`mx-auto flex h-14 max-w-5xl items-center justify-between rounded-full border px-3 pl-5 transition-all duration-300 ${
+          className={`mx-auto flex h-14 max-w-5xl items-center justify-between rounded-full border px-3 pl-4 pr-3 transition-all duration-300 ${
             scrolled
-              ? "border-zinc-200 bg-white/82 shadow-[0_18px_70px_rgba(15,23,42,0.10)] backdrop-blur-2xl dark:border-zinc-800 dark:bg-zinc-950/78"
+              ? isDark
+                ? "border-white/10 bg-[rgba(9,9,11,0.72)] shadow-[0_18px_70px_rgba(2,6,23,0.42)] backdrop-blur-2xl"
+                : "border-zinc-200/80 bg-white/80 shadow-[0_18px_70px_rgba(15,23,42,0.10)] backdrop-blur-2xl"
               : "border-transparent bg-transparent"
           }`}
         >
@@ -56,7 +59,7 @@ const Nav = () => {
                 <span>~/</span>
               </motion.span>
             </span>
-            <span className="relative h-5 overflow-hidden font-mono text-sm font-semibold tracking-[-0.04em]">
+            <span className="font-display relative h-5 overflow-hidden text-[0.95rem] font-semibold tracking-[-0.05em]">
               <motion.span
                 initial={false}
                 whileHover={{ y: -20 }}
@@ -81,7 +84,7 @@ const Nav = () => {
               <Link
                 key={link.href}
                 href={link.href}
-                className="rounded-full px-4 py-2 text-sm font-medium text-zinc-600 transition hover:bg-zinc-100 hover:text-zinc-950 dark:text-zinc-400 dark:hover:bg-zinc-900 dark:hover:text-white"
+                className="font-display rounded-full px-4 py-2 text-[0.95rem] font-medium tracking-[-0.03em] text-zinc-600 transition hover:bg-zinc-100/90 hover:text-zinc-950 dark:text-zinc-400 dark:hover:bg-zinc-900 dark:hover:text-white"
               >
                 {link.label}
               </Link>
@@ -98,7 +101,7 @@ const Nav = () => {
             </button>
             <a
               href="mailto:mirza.devs@gmail.com"
-              className="inline-flex items-center gap-2 rounded-full bg-zinc-950 px-4 py-2.5 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-zinc-800 dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-200"
+              className="font-display inline-flex items-center gap-2 rounded-full bg-zinc-950 px-4 py-2.5 text-sm font-semibold tracking-[-0.03em] text-white transition hover:-translate-y-0.5 hover:bg-zinc-800 dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-200"
             >
               <Mail size={15} />
               Hire me
@@ -144,7 +147,7 @@ const Nav = () => {
                   >
                     <Link
                       href={link.href}
-                      className="block rounded-3xl border border-zinc-200 bg-zinc-50 px-5 py-4 text-2xl font-semibold tracking-tight text-zinc-950 dark:border-zinc-800 dark:bg-zinc-900 dark:text-white"
+                      className="font-display block rounded-3xl border border-zinc-200 bg-zinc-50 px-5 py-4 text-[2rem] font-semibold tracking-[-0.05em] text-zinc-950 dark:border-zinc-800 dark:bg-zinc-900 dark:text-white"
                       onClick={() => setIsOpen(false)}
                     >
                       {link.label}
@@ -157,7 +160,7 @@ const Nav = () => {
                 initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.18 }}
-                className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-3xl bg-zinc-950 px-5 py-4 text-sm font-semibold text-white dark:bg-white dark:text-zinc-950"
+                className="font-display mt-4 inline-flex w-full items-center justify-center gap-2 rounded-3xl bg-zinc-950 px-5 py-4 text-sm font-semibold tracking-[-0.03em] text-white dark:bg-white dark:text-zinc-950"
               >
                 <Mail size={17} />
                 Let&apos;s talk

@@ -23,7 +23,8 @@ const config = {
         blackout: "#080808",
       },
       fontFamily: {
-        sans: ["var(--font-geist-sans)"],
+        sans: ["var(--font-dm-sans)"],
+        display: ["var(--font-space-grotesk)"],
         mono: ["var(--font-geist-mono)"],
       },
       keyframes: {
