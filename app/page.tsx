@@ -127,34 +127,58 @@ const projects = [
 
 const experience = [
   {
-    company: "Sherry.gg",
-    role: "Full Stack Engineer",
-    period: "Nov 2025 - Mar 2026",
+    company: "PureSoft Labs OÜ",
+    role: "Software Engineer",
+    period: "Apr 2026 - Present",
+    place: "Remote, Estonia",
+    line: "Building and shipping software at PureSoft Labs, contributing to core engineering efforts.",
+    stack: ["TypeScript", "Node.js", "React", "AWS"],
+  },
+  {
+    company: "Cardinal Web 3",
+    role: "Founding Engineer",
+    period: "May 2026 - Present",
+    place: "Remote, UAE",
+    line: "Leading Web3 security and blockchain protection initiatives from the ground up.",
+    stack: ["Web3", "Solidity", "TypeScript", "Blockchain"],
+  },
+  {
+    company: "exzyt",
+    role: "Software Engineer",
+    period: "Oct 2025 - Present",
+    place: "Remote, UAE",
+    line: "Building the marketplace for modern M&A with deal rooms, document workflows, and collaboration tools.",
+    stack: ["Next.js", "TypeScript", "Tailwind", "AWS"],
+  },
+  {
+    company: "Stealth Startup",
+    role: "Software Engineer",
+    period: "Nov 2025 - May 2026",
     place: "Remote, South Korea",
     line: "Owned commerce and transaction flows, improved processing speed, and fixed production reliability issues.",
     stack: ["Next.js", "TypeScript", "Node.js", "PostgreSQL"],
   },
   {
-    company: "Exzyt.com",
-    role: "Founding Engineer",
-    period: "May 2025 - Jan 2026",
-    place: "Remote, UAE",
-    line: "Built a real estate platform with deal rooms, document workflows, collaboration, and AWS delivery.",
-    stack: ["Next.js", "TypeScript", "Tailwind", "AWS"],
+    company: "McKinsey & Company",
+    role: "Forward Program Fellow",
+    period: "Mar 2025 - Sep 2025",
+    place: "Remote",
+    line: "Selected for McKinsey's Forward Program, developing leadership and problem-solving capabilities.",
+    stack: ["Strategy", "Leadership", "Problem Solving"],
   },
   {
     company: "Minimalisticlearning",
-    role: "Frontend Developer",
+    role: "UI/UX Developer",
     period: "Jan 2025 - Jun 2025",
     place: "Remote, UK",
     line: "Built reusable React interfaces and improved responsive performance across education workflows.",
     stack: ["React", "TypeScript", "Redux", "REST"],
   },
   {
-    company: "Datapoint IT Tech Pvt Ltd",
-    role: "Software Engineer",
+    company: "Datapoint",
+    role: "Back End Developer",
     period: "Aug 2024 - Dec 2024",
-    place: "Remote",
+    place: "Remote, India",
     line: "Maintained Node.js APIs, auth flows, partner integrations, and database-backed services.",
     stack: ["Node.js", "Express", "REST", "Databases"],
   },
@@ -324,6 +348,97 @@ function useRotatingText(items: string[]) {
   return items[index];
 }
 
+function TimelineExperience({
+  experience,
+}: {
+  experience: {
+    company: string;
+    role: string;
+    period: string;
+    place: string;
+    line: string;
+    stack: string[];
+  }[];
+}) {
+  const timelineRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: timelineRef,
+    offset: ["start 80%", "end 60%"],
+  });
+
+  return (
+    <div ref={timelineRef} className="relative mx-auto max-w-4xl">
+      {/* Background track line */}
+      <div className="absolute left-0 top-0 h-full w-px bg-zinc-200 dark:bg-zinc-800" />
+      {/* Animated progress line */}
+      <motion.div
+        className="absolute left-0 top-0 w-px origin-top bg-blue-500 dark:bg-blue-400"
+        style={{ height: "100%", scaleY: scrollYProgress }}
+      />
+
+      {experience.map((job, index) => (
+        <TimelineItem key={`${job.company}-${job.period}`} job={job} index={index} />
+      ))}
+    </div>
+  );
+}
+
+function TimelineItem({
+  job,
+  index,
+}: {
+  job: {
+    company: string;
+    role: string;
+    period: string;
+    place: string;
+    line: string;
+    stack: string[];
+  };
+  index: number;
+}) {
+  const itemRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: itemRef,
+    offset: ["start 80%", "end 80%"],
+  });
+  const dotScale = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
+  const dotOpacity = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
+  const contentY = useTransform(scrollYProgress, [0, 0.4], [30, 0]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.4], [0, 1]);
+
+  return (
+    <div ref={itemRef} className="relative pb-14 pl-7 last:pb-0">
+      {/* Animated dot */}
+      <motion.span
+        className="absolute -left-[5px] top-2 size-2.5 rounded-full bg-blue-500 ring-4 ring-white dark:bg-blue-400 dark:ring-[#0b0d12]"
+        style={{ scale: dotScale, opacity: dotOpacity }}
+      />
+      <motion.div style={{ y: contentY, opacity: contentOpacity }}>
+        <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
+          <div>
+            <h3 className="font-display text-xl font-semibold tracking-[-0.04em] text-zinc-950 dark:text-white">
+              {job.role}
+            </h3>
+            <p className="mt-1 text-sm font-medium text-blue-600 dark:text-blue-400">
+              {job.company} · {job.place}
+            </p>
+          </div>
+          <p className="font-mono text-sm text-zinc-500">{job.period}</p>
+        </div>
+        <p className="mt-4 max-w-3xl text-base leading-7 text-zinc-600 dark:text-zinc-400">
+          {job.line}
+        </p>
+        <div className="mt-4 flex flex-wrap gap-2">
+          {job.stack.map((item) => (
+            <Pill key={item}>{item}</Pill>
+          ))}
+        </div>
+      </motion.div>
+    </div>
+  );
+}
+
 function FadeIn({
   children,
   delay = 0,
@@ -389,36 +504,25 @@ function SkillToken({
   index: number;
 }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 18, scale: 0.96, filter: "blur(8px)" }}
-      whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
-      viewport={{ once: false, amount: 0.45 }}
-      transition={{
-        duration: 0.48,
-        delay: index * 0.018,
-        ease: [0.22, 1, 0.36, 1],
-      }}
-      whileHover={{ y: -4, scale: 1.02 }}
-      className="group inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white/82 px-2.5 py-2 shadow-[0_16px_50px_rgba(15,23,42,0.05)] backdrop-blur transition-colors hover:border-zinc-300 hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950/82 dark:hover:border-zinc-700 dark:hover:bg-zinc-900/90 sm:gap-3 sm:px-3.5 sm:py-2.5"
-    >
-      <span className="flex size-7 items-center justify-center rounded-full bg-zinc-100 text-[10px] font-bold tracking-[-0.02em] text-zinc-700 transition group-hover:bg-blue-50 group-hover:text-blue-700 dark:bg-zinc-900 dark:text-zinc-300 dark:group-hover:bg-blue-950/50 dark:group-hover:text-blue-300 sm:size-9 sm:text-[11px]">
+    <div className="group inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white/82 px-2.5 py-1.5 backdrop-blur transition-all hover:border-zinc-300 hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950/82 dark:hover:border-zinc-700 dark:hover:bg-zinc-900/90 sm:gap-3 sm:px-3.5 sm:py-2">
+      <span className="flex size-6 items-center justify-center rounded-full bg-zinc-100 text-[9px] font-bold tracking-[-0.02em] text-zinc-700 dark:bg-zinc-900 dark:text-zinc-300 sm:size-8 sm:text-[11px]">
         {item.icon ? (
           <Image
             src={item.icon}
             alt=""
             width={20}
             height={20}
-            className={`size-4 object-contain sm:size-5 ${item.invertOnDark ? "dark:invert" : ""}`}
+            className={`size-3.5 object-contain sm:size-5 ${item.invertOnDark ? "dark:invert" : ""}`}
             loading="lazy"
           />
         ) : (
           item.fallback ?? item.name.slice(0, 2)
         )}
       </span>
-      <span className="whitespace-nowrap text-xs font-semibold tracking-[-0.01em] text-zinc-800 dark:text-zinc-200 sm:text-sm">
+      <span className="whitespace-nowrap text-[11px] font-semibold tracking-[-0.01em] text-zinc-800 dark:text-zinc-200 sm:text-sm">
         {item.name}
       </span>
-    </motion.div>
+    </div>
   );
 }
 
@@ -609,34 +713,7 @@ export default function Home() {
             title="Where I have shipped."
           />
 
-          <div className="mx-auto max-w-4xl">
-            {experience.map((job, index) => (
-              <FadeIn key={`${job.company}-${job.period}`} delay={index * 0.04}>
-                <article className="relative border-l border-zinc-200 pb-10 pl-7 last:pb-0 dark:border-zinc-800">
-                  <span className="absolute -left-[5px] top-2 size-2.5 rounded-full bg-zinc-950 ring-4 ring-white dark:bg-white dark:ring-[#0b0d12]" />
-                  <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
-                    <div>
-                      <h3 className="font-display text-xl font-semibold tracking-[-0.04em] text-zinc-950 dark:text-white">
-                        {job.role}
-                      </h3>
-                      <p className="mt-1 text-sm font-medium text-blue-600 dark:text-blue-400">
-                        {job.company} · {job.place}
-                      </p>
-                    </div>
-                    <p className="font-mono text-sm text-zinc-500">{job.period}</p>
-                  </div>
-                  <p className="mt-4 max-w-3xl text-base leading-7 text-zinc-600 dark:text-zinc-400">
-                    {job.line}
-                  </p>
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {job.stack.map((item) => (
-                      <Pill key={item}>{item}</Pill>
-                    ))}
-                  </div>
-                </article>
-              </FadeIn>
-            ))}
-          </div>
+          <TimelineExperience experience={experience} />
         </div>
       </section>
 
@@ -648,17 +725,17 @@ export default function Home() {
             copy="Built for product work, backend systems, and web3 flows without turning the whole stack into chain-bro chaos."
           />
 
-          <div className="space-y-8">
+          <div className="space-y-2">
             {stack.map((group, groupIndex) => (
               <FadeIn key={group.category} delay={groupIndex * 0.04}>
-                <div className="flex flex-col gap-3 rounded-[1.25rem] border border-zinc-200 bg-white/64 p-3 backdrop-blur dark:border-zinc-800 dark:bg-zinc-950/56 sm:gap-4 sm:rounded-[2rem] sm:p-4 md:flex-row md:items-center">
-                  <div className="flex min-w-32 items-center gap-3 md:w-36">
-                    <span className="h-px w-8 bg-blue-600 dark:bg-blue-400" />
-                    <h3 className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-zinc-500 dark:text-zinc-500">
+                <div className="rounded-xl border border-zinc-200 bg-white/64 px-4 py-3 backdrop-blur dark:border-zinc-800 dark:bg-zinc-950/56 sm:rounded-2xl sm:px-5 sm:py-4">
+                  <div className="mb-2.5 flex items-center gap-2.5 sm:mb-3">
+                    <span className="h-px w-5 bg-blue-600 dark:bg-blue-400" />
+                    <h3 className="font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-zinc-500 dark:text-zinc-500 sm:text-[11px]">
                       {group.category}
                     </h3>
                   </div>
-                  <div className="flex flex-1 flex-wrap items-center gap-2.5">
+                  <div className="flex flex-wrap gap-1.5 sm:gap-2">
                     {group.items.map((item, itemIndex) => (
                       <SkillToken
                         key={item.name}
