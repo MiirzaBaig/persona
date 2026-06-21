@@ -127,7 +127,7 @@ export default function HeroThree() {
       camera.updateProjectionMatrix();
 
       const isMobile = width < 768;
-      group.position.set(isMobile ? 0.7 : 2.15, isMobile ? -0.55 : -0.2, 0);
+      group.position.set(isMobile ? 0.7 : 3.2, isMobile ? -0.55 : -0.1, 0);
       group.scale.setScalar(isMobile ? 0.72 : 1);
     };
 

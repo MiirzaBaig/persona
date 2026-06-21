@@ -91,95 +91,97 @@ const projects = [
       "from-amber-500/18 via-orange-500/10 to-yellow-500/20 dark:from-amber-400/16 dark:via-orange-400/10 dark:to-yellow-400/18",
   },
   {
-    name: "Avelia",
-    type: "UI Showcase",
-    href: "https://avelia.vercel.app/",
-    label: "polish heavy",
-    vibe: "Sleek, responsive, and very locked-in on visual feel.",
-    line: "Built a sleek frontend with strong UI polish, clean hierarchy, and smooth interactions that feel premium instead of template-made.",
-    stack: ["Next.js", "Tailwind CSS", "Responsive UI"],
+    name: "AI Comic Creator",
+    type: "AI Creative",
+    href: "https://ai-comic-nextjs.vercel.app/",
+    label: "visual gen",
+    vibe: "Story in, comic out — consistent characters across every panel.",
+    line: "AI-powered comic generation platform that transforms prompts into publication-ready panels with character consistency, panel-level editing, and multiple export formats.",
+    stack: ["Next.js", "TypeScript", "AI", "Vercel"],
     accent:
-      "from-rose-500/18 via-orange-500/10 to-pink-500/20 dark:from-rose-400/16 dark:via-orange-400/10 dark:to-pink-400/18",
+      "from-purple-500/20 via-indigo-500/10 to-violet-500/18 dark:from-purple-400/18 dark:via-indigo-400/10 dark:to-violet-400/16",
   },
   {
-    name: "Forgee",
-    type: "Component System",
-    href: "https://forgee-taupe.vercel.app/",
-    label: "system clean",
-    vibe: "Reusable pieces, modern layout rhythm, smooth on every screen.",
-    line: "Developed a modern UI platform with reusable components, responsive structure, and performance-minded interactions across devices.",
-    stack: ["Next.js", "Tailwind CSS", "Component Design"],
+    name: "AI Course Creator",
+    type: "EdTech SaaS",
+    href: "https://aicoursecreator.com/",
+    label: "curriculum engine",
+    vibe: "Conversational course design that keeps the whole curriculum in sync.",
+    line: "AI-driven curriculum builder with guided workflows, coherent module networks, real-time editing, and source material uploads for educators.",
+    stack: ["React", "TypeScript", "Node.js", "AI"],
     accent:
-      "from-zinc-500/20 via-stone-500/10 to-orange-500/16 dark:from-zinc-400/18 dark:via-stone-400/10 dark:to-orange-400/14",
+      "from-teal-500/20 via-emerald-500/10 to-green-500/18 dark:from-teal-400/18 dark:via-emerald-400/10 dark:to-green-400/16",
   },
-  {
-    name: "Arche",
-    type: "Minimal Product",
-    href: "https://arche-tau.vercel.app/",
-    label: "quiet flex",
-    vibe: "Minimal on purpose, with a scalable structure under the hood.",
-    line: "Built a design-focused web app with a minimal look, scalable component structure, and optimized responsiveness and performance.",
-    stack: ["Next.js", "TypeScript", "Minimal UI"],
-    accent:
-      "from-cyan-500/16 via-slate-500/8 to-blue-500/20 dark:from-cyan-400/14 dark:via-slate-400/8 dark:to-blue-400/18",
-  },
+];
+
+const otherWork = [
+  { name: "Avelia", href: "https://avelia.vercel.app/" },
+  { name: "Forgee", href: "https://forgee-taupe.vercel.app/" },
+  { name: "Arche", href: "https://arche-tau.vercel.app/" },
 ];
 
 const experience = [
   {
     company: "PureSoft Labs OÜ",
     role: "Software Engineer",
+    type: "",
     period: "Apr 2026 - Present",
     place: "Remote, Estonia",
-    line: "Building and shipping software at PureSoft Labs, contributing to core engineering efforts.",
+    line: "Owning full-stack feature delivery across the core product — shipped auth overhaul, optimized API response times, and built internal tooling that cut deploy cycles.",
     stack: ["TypeScript", "Node.js", "React", "AWS"],
   },
   {
     company: "Cardinal Web 3",
     role: "Founding Engineer",
+    type: "",
     period: "May 2026 - Present",
     place: "Remote, UAE",
-    line: "Leading Web3 security and blockchain protection initiatives from the ground up.",
+    line: "Architecting the security layer and smart contract infrastructure from scratch — built the monitoring pipeline, wallet integration flows, and on-chain alerting system.",
     stack: ["Web3", "Solidity", "TypeScript", "Blockchain"],
   },
   {
     company: "exzyt",
     role: "Software Engineer",
-    period: "Oct 2025 - Present",
+    type: "",
+    period: "Oct 2025 - Jun 2026",
     place: "Remote, UAE",
-    line: "Building the marketplace for modern M&A with deal rooms, document workflows, and collaboration tools.",
+    line: "Built the M&A deal room platform end-to-end — document workflows, role-based access, real-time collaboration, and secure file sharing used by active deal teams.",
     stack: ["Next.js", "TypeScript", "Tailwind", "AWS"],
   },
   {
     company: "Stealth Startup",
     role: "Software Engineer",
+    type: "",
     period: "Nov 2025 - May 2026",
     place: "Remote, South Korea",
-    line: "Owned commerce and transaction flows, improved processing speed, and fixed production reliability issues.",
+    line: "Owned the commerce engine — rebuilt transaction flows that cut processing time by 3x, resolved critical payment reliability issues in production.",
     stack: ["Next.js", "TypeScript", "Node.js", "PostgreSQL"],
   },
   {
     company: "McKinsey & Company",
     role: "Forward Program Fellow",
+    type: "",
     period: "Mar 2025 - Sep 2025",
     place: "Remote",
-    line: "Selected for McKinsey's Forward Program, developing leadership and problem-solving capabilities.",
+    line: "Selected for McKinsey's competitive Forward Program — developed structured problem-solving and stakeholder communication skills applied to real business cases.",
     stack: ["Strategy", "Leadership", "Problem Solving"],
   },
   {
     company: "Minimalisticlearning",
     role: "UI/UX Developer",
+    type: "",
     period: "Jan 2025 - Jun 2025",
     place: "Remote, UK",
-    line: "Built reusable React interfaces and improved responsive performance across education workflows.",
+    line: "Redesigned the student-facing interface — built a reusable component library, improved mobile responsiveness, and reduced page load times across education workflows.",
     stack: ["React", "TypeScript", "Redux", "REST"],
   },
   {
     company: "Datapoint",
     role: "Back End Developer",
+    type: "",
     period: "Aug 2024 - Dec 2024",
     place: "Remote, India",
-    line: "Maintained Node.js APIs, auth flows, partner integrations, and database-backed services.",
+    line: "Maintained and extended Node.js APIs handling auth, partner integrations, and data pipelines — shipped webhook infrastructure and improved query performance.",
     stack: ["Node.js", "Express", "REST", "Databases"],
   },
 ];
@@ -354,6 +356,7 @@ function TimelineExperience({
   experience: {
     company: string;
     role: string;
+    type: string;
     period: string;
     place: string;
     line: string;
@@ -390,6 +393,7 @@ function TimelineItem({
   job: {
     company: string;
     role: string;
+    type: string;
     period: string;
     place: string;
     line: string;
@@ -435,6 +439,40 @@ function TimelineItem({
           ))}
         </div>
       </motion.div>
+    </div>
+  );
+}
+
+function MagneticTag({ children }: { children: React.ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  const x = useRef(0);
+  const y = useRef(0);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const el = ref.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    x.current = (e.clientX - rect.left - rect.width / 2) * 0.45;
+    y.current = (e.clientY - rect.top - rect.height / 2) * 0.45;
+    el.style.transform = `translate(${x.current}px, ${y.current}px)`;
+  };
+
+  const handleMouseLeave = () => {
+    const el = ref.current;
+    if (!el) return;
+    el.style.transform = "translate(0px, 0px)";
+  };
+
+  return (
+    <div
+      ref={ref}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{ transition: "transform 0.35s cubic-bezier(0.22, 1, 0.36, 1)" }}
+      className="cursor-default"
+    >
+      {children}
     </div>
   );
 }
@@ -549,20 +587,6 @@ export default function Home() {
           className="relative z-10 mx-auto flex w-full max-w-6xl px-4 pb-10 pt-4 sm:px-6 sm:pb-16 sm:pt-8"
         >
           <div className="max-w-3xl">
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="mb-8 flex flex-wrap items-center gap-2 text-sm text-zinc-600 dark:text-zinc-400"
-            >
-              <span className="font-display rounded-full bg-zinc-950 px-3 py-1.5 text-[0.92rem] font-medium tracking-[-0.03em] text-white dark:bg-white dark:text-zinc-950">
-                open to the right team
-              </span>
-              <span className="font-display rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1.5 text-[0.92rem] font-medium tracking-[-0.03em] dark:border-zinc-800 dark:bg-zinc-950">
-                remote-friendly
-              </span>
-            </motion.div>
-
             <motion.p
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
@@ -582,7 +606,12 @@ export default function Home() {
               <span className="block text-zinc-400 dark:text-zinc-600">what ships.</span>
             </motion.h1>
 
-            <div className="mt-5 h-8 overflow-hidden sm:mt-7 sm:h-10 md:h-12">
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55, delay: 0.18 }}
+              className="mt-7 h-10 overflow-hidden sm:mt-9 sm:h-12 md:h-14"
+            >
               <AnimatePresence mode="wait">
                 <motion.p
                   key={headline}
@@ -590,12 +619,12 @@ export default function Home() {
                   animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                   exit={{ opacity: 0, y: -22, filter: "blur(8px)" }}
                   transition={{ duration: 0.45, ease: "easeOut" }}
-                  className="font-display text-lg font-medium tracking-[-0.05em] text-zinc-800 dark:text-zinc-200 sm:text-2xl md:text-[2.35rem]"
+                  className="font-display text-xl font-medium tracking-[-0.05em] text-zinc-800 dark:text-zinc-200 sm:text-[1.7rem] md:text-[2.5rem]"
                 >
                   {headline}
                 </motion.p>
               </AnimatePresence>
-            </div>
+            </motion.div>
 
             <motion.p
               initial={{ opacity: 0, y: 16 }}
@@ -610,7 +639,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.32 }}
-              className="mt-7 flex flex-col gap-3 sm:mt-9 sm:flex-row"
+              className="mt-7 flex flex-wrap items-center gap-3 sm:mt-9"
             >
               <a
                 href={`mailto:${profile.email}`}
@@ -626,83 +655,99 @@ export default function Home() {
                 See the work
                 <ArrowUpRight size={16} />
               </a>
+              <span className="hidden h-5 w-px bg-zinc-300 dark:bg-zinc-700 sm:block" />
+              <span className="font-mono text-[11px] font-medium uppercase tracking-[0.12em] text-zinc-400 dark:text-zinc-500">
+                open to work · remote
+              </span>
             </motion.div>
           </div>
         </motion.div>
+      </section>
+
+      <section id="about" className="border-b border-zinc-200 bg-white px-4 py-14 dark:border-zinc-900 dark:bg-[#0b0d12] sm:px-6 md:py-24">
+        <FadeIn className="mx-auto max-w-3xl text-center">
+          <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.24em] text-blue-600 dark:text-blue-400">
+            about
+          </p>
+          <h2 className="font-display mt-3 text-balance text-2xl font-semibold tracking-[-0.04em] text-zinc-950 dark:text-white sm:text-3xl md:text-4xl">
+            Ships fast. Breaks nothing.
+          </h2>
+          <p className="mx-auto mt-5 max-w-2xl text-pretty text-base leading-7 text-zinc-600 dark:text-zinc-400 sm:text-lg sm:leading-8">
+            Full-stack engineer building SaaS, Web3 tools, and AI products with remote teams across the globe. I own features end-to-end, from schema to pixel, and let agentic workflows handle the grunt work so I can focus on what actually ships.
+          </p>
+        </FadeIn>
       </section>
 
       <section id="projects" className="px-4 py-14 sm:px-6 md:py-28">
         <div className="mx-auto max-w-6xl">
           <SectionTitle
             label="selected work"
-            title="Live, polished, different."
-            copy="Not cloned landing pages. Not fake case studies. Each one has its own lane, its own energy, and a UI direction that actually fits the product."
+            title="Things I've built."
+            copy="Live products, real users, real code. Each with its own stack and design direction."
           />
 
-          <div className="grid gap-4 md:grid-cols-2">
+          <div className="grid gap-3 sm:gap-4 md:grid-cols-2">
             {projects.map((project, index) => (
               <FadeIn key={project.name} delay={index * 0.03}>
                 <a
                   href={project.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative flex h-full flex-col overflow-hidden rounded-[1.5rem] border border-zinc-200/90 bg-white/95 p-5 shadow-[0_18px_70px_rgba(15,23,42,0.06)] transition duration-300 hover:-translate-y-1.5 hover:border-zinc-300 hover:shadow-[0_32px_100px_rgba(15,23,42,0.12)] dark:border-zinc-800 dark:bg-zinc-950/95 dark:hover:border-zinc-700 sm:rounded-[1.9rem] sm:p-6"
+                  className="group relative flex h-full flex-col rounded-xl border border-zinc-200 bg-white p-5 transition-colors duration-150 ease-[cubic-bezier(.2,.8,.2,1)] hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950 dark:shadow-none dark:hover:bg-zinc-900/80 sm:p-6"
                 >
-                  <div
-                    className={`absolute inset-x-6 top-0 h-28 rounded-full bg-gradient-to-r ${project.accent} opacity-100 blur-3xl transition duration-300 group-hover:scale-105`}
-                  />
-                  <div
-                    className={`absolute -right-12 top-10 size-36 rounded-full bg-gradient-to-br ${project.accent} opacity-70 blur-3xl transition duration-300 group-hover:scale-110`}
-                  />
-                  <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.78),rgba(255,255,255,0.92)_38%,rgba(255,255,255,1))] dark:bg-[linear-gradient(180deg,rgba(9,9,11,0.35),rgba(9,9,11,0.82)_38%,rgba(9,9,11,0.96))]" />
-                  <div className="absolute inset-[1px] rounded-[calc(1.5rem-1px)] border border-white/70 dark:border-white/5 sm:rounded-[calc(1.9rem-1px)]" />
-                  <div className="relative z-10 flex h-full flex-col">
-                    <div className="flex items-start justify-between gap-4">
-                      <div>
-                        <div className="flex flex-wrap items-center gap-2">
-                          <span className="rounded-full border border-blue-200/80 bg-blue-50/90 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-blue-700 backdrop-blur dark:border-blue-900/70 dark:bg-blue-950/60 dark:text-blue-300">
-                            {project.type}
-                          </span>
-                          <span className="rounded-full border border-zinc-200/80 bg-white/75 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-zinc-500 backdrop-blur dark:border-zinc-800 dark:bg-zinc-900/80 dark:text-zinc-400">
-                            {project.label}
-                          </span>
-                        </div>
-                        <h3 className="font-display mt-4 max-w-[12ch] text-[1.75rem] font-semibold leading-[0.92] tracking-[-0.06em] text-zinc-950 dark:text-white sm:text-[2rem] md:text-[2.15rem]">
-                          {project.name}
-                        </h3>
-                      </div>
-                      <ArrowUpRight
-                        size={22}
-                        className="mt-1 shrink-0 text-zinc-400 transition group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-zinc-950 dark:group-hover:text-white"
-                      />
-                    </div>
-
-                    <div className="flex flex-1 flex-col">
-                      <p className="mt-4 max-w-xl text-sm font-medium leading-6 text-zinc-500 dark:text-zinc-400">
-                        {project.vibe}
-                      </p>
-
-                      <p className="mt-4 max-w-2xl text-base leading-7 text-zinc-700 dark:text-zinc-300">
-                        {project.line}
-                      </p>
-
-                      <div className="mt-6 flex flex-wrap gap-2">
-                        {project.stack.map((item) => (
-                          <Pill key={item}>{item}</Pill>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="mt-auto flex justify-center pt-7">
-                      <span className="inline-flex items-center justify-center rounded-full border border-zinc-200/80 bg-white/75 px-4 py-2 text-sm font-medium text-zinc-800 backdrop-blur transition group-hover:border-blue-200 group-hover:text-blue-600 dark:border-zinc-800 dark:bg-zinc-900/75 dark:text-zinc-200 dark:group-hover:border-blue-900/70 dark:group-hover:text-blue-400">
-                        Open live demo
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="space-y-3">
+                      <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-zinc-400 dark:text-zinc-500">
+                        {project.type}
                       </span>
+                      <h3 className="font-display text-lg font-semibold tracking-[-0.04em] text-zinc-950 dark:text-white sm:text-xl">
+                        {project.name}
+                      </h3>
                     </div>
+                    <ArrowUpRight
+                      size={18}
+                      className="mt-1 shrink-0 text-zinc-300 transition-all duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-zinc-950 dark:text-zinc-700 dark:group-hover:text-white"
+                    />
+                  </div>
+
+                  <p className="mt-3 text-[0.94rem] leading-relaxed text-zinc-500 dark:text-zinc-400">
+                    {project.line}
+                  </p>
+
+                  <div className="mt-auto flex flex-wrap gap-1.5 pt-5">
+                    {project.stack.map((item) => (
+                      <span
+                        key={item}
+                        className="rounded-md bg-zinc-100 px-2 py-0.5 text-[11px] font-medium text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400"
+                      >
+                        {item}
+                      </span>
+                    ))}
                   </div>
                 </a>
               </FadeIn>
             ))}
           </div>
+
+          <FadeIn className="mt-8 text-center">
+            <p className="mb-3 text-sm font-medium text-zinc-400 dark:text-zinc-500">
+              Other experiments &amp; UI work
+            </p>
+            <div className="flex flex-wrap justify-center gap-2">
+              {otherWork.map((item) => (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center gap-1.5 rounded-full border border-zinc-200 bg-white px-4 py-2 text-sm font-medium text-zinc-600 transition hover:-translate-y-0.5 hover:border-zinc-300 hover:text-zinc-950 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-400 dark:hover:border-zinc-700 dark:hover:text-white"
+                >
+                  {item.name}
+                  <ArrowUpRight size={13} className="text-zinc-400 transition group-hover:text-zinc-950 dark:group-hover:text-white" />
+                </a>
+              ))}
+            </div>
+          </FadeIn>
         </div>
       </section>
 
@@ -718,92 +763,64 @@ export default function Home() {
       </section>
 
       <section id="stack" className="px-4 py-14 sm:px-6 md:py-28">
-        <div className="mx-auto max-w-6xl">
+        <div className="mx-auto max-w-4xl">
           <SectionTitle
             label="toolbox"
-            title="Modern stack. Simple taste."
-            copy="Built for product work, backend systems, and web3 flows without turning the whole stack into chain-bro chaos."
+            title="What I work with."
           />
 
-          <div className="space-y-2">
-            {stack.map((group, groupIndex) => (
-              <FadeIn key={group.category} delay={groupIndex * 0.04}>
-                <div className="rounded-xl border border-zinc-200 bg-white/64 px-4 py-3 backdrop-blur dark:border-zinc-800 dark:bg-zinc-950/56 sm:rounded-2xl sm:px-5 sm:py-4">
-                  <div className="mb-2.5 flex items-center gap-2.5 sm:mb-3">
-                    <span className="h-px w-5 bg-blue-600 dark:bg-blue-400" />
-                    <h3 className="font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-zinc-500 dark:text-zinc-500 sm:text-[11px]">
-                      {group.category}
-                    </h3>
-                  </div>
-                  <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                    {group.items.map((item, itemIndex) => (
-                      <SkillToken
-                        key={item.name}
-                        item={item}
-                        index={groupIndex * 6 + itemIndex}
-                      />
-                    ))}
-                  </div>
-                </div>
-              </FadeIn>
-            ))}
-          </div>
+          <FadeIn>
+            <div className="flex flex-wrap justify-center gap-2">
+              {stack.flatMap((group) =>
+                group.items.map((item) => (
+                  <MagneticTag key={item.name}>
+                    <span
+                      className="group relative inline-flex items-center gap-2 rounded-full border border-zinc-200/80 bg-white px-3.5 py-2 text-[13px] font-medium text-zinc-600 transition-all duration-200 hover:border-zinc-300 hover:text-zinc-950 hover:shadow-[0_4px_12px_rgba(0,0,0,0.06)] dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-400 dark:hover:border-zinc-600 dark:hover:text-white dark:hover:shadow-[0_4px_12px_rgba(0,0,0,0.3)]"
+                    >
+                      {item.icon ? (
+                        <Image
+                          src={item.icon}
+                          alt=""
+                          width={16}
+                          height={16}
+                          className={`size-4 object-contain opacity-60 transition-opacity group-hover:opacity-100 ${item.invertOnDark ? "dark:invert" : ""}`}
+                          loading="lazy"
+                        />
+                      ) : (
+                        <span className="flex size-4 items-center justify-center text-[9px] font-bold text-zinc-300 transition-colors group-hover:text-zinc-500 dark:text-zinc-600 dark:group-hover:text-zinc-400">
+                          {item.fallback ?? item.name.slice(0, 2)}
+                        </span>
+                      )}
+                      {item.name}
+                    </span>
+                  </MagneticTag>
+                ))
+              )}
+            </div>
+          </FadeIn>
         </div>
       </section>
 
       <section className="px-4 pb-10 sm:px-6 md:pb-14">
         <FadeIn>
-          <div className="mx-auto max-w-6xl rounded-[1.25rem] bg-zinc-950 p-5 text-white dark:bg-white dark:text-zinc-950 sm:rounded-[2rem] sm:p-7 md:p-10">
-            <div className="grid gap-8 md:grid-cols-[1fr_auto] md:items-end">
-              <div>
-                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-300 dark:text-blue-700">
-                  available for the right team
-                </p>
-                <h2 className="mt-4 max-w-3xl text-2xl font-semibold tracking-tight sm:text-4xl md:text-6xl">
-                  Need someone who can build and care?
-                </h2>
-                <p className="mt-5 max-w-2xl text-base leading-7 text-zinc-300 dark:text-zinc-700">
-                  I am best with small teams, product speed, messy requirements, and features that need both taste and implementation.
-                </p>
-              </div>
-              <div className="flex flex-col gap-3 sm:flex-row md:flex-col">
-                <a
-                  href={`mailto:${profile.email}`}
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-zinc-950 transition hover:-translate-y-0.5 dark:bg-zinc-950 dark:text-white"
-                >
-                  <Mail size={17} />
-                  Email me
-                </a>
-                <div className="flex gap-3">
-                  <a
-                    href={profile.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="GitHub"
-                    className="inline-flex size-11 items-center justify-center rounded-full border border-white/20 text-white transition hover:-translate-y-0.5 hover:border-white/60 dark:border-zinc-300 dark:text-zinc-950 dark:hover:border-zinc-900"
-                  >
-                    <Github size={18} />
-                  </a>
-                  <a
-                    href={profile.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="LinkedIn"
-                    className="inline-flex size-11 items-center justify-center rounded-full border border-white/20 text-white transition hover:-translate-y-0.5 hover:border-white/60 dark:border-zinc-300 dark:text-zinc-950 dark:hover:border-zinc-900"
-                  >
-                    <Linkedin size={18} />
-                  </a>
-                  <a
-                    href={profile.saas}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Current product"
-                    className="inline-flex size-11 items-center justify-center rounded-full border border-white/20 text-white transition hover:-translate-y-0.5 hover:border-white/60 dark:border-zinc-300 dark:text-zinc-950 dark:hover:border-zinc-900"
-                  >
-                    <Globe2 size={18} />
-                  </a>
-                </div>
-              </div>
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.24em] text-blue-600 dark:text-blue-400">
+              let&apos;s work together
+            </p>
+            <h2 className="font-display mt-4 text-balance text-3xl font-semibold tracking-[-0.04em] text-zinc-950 dark:text-white sm:text-4xl md:text-5xl">
+              Got something to build?
+            </h2>
+            <p className="mx-auto mt-4 max-w-lg text-base leading-7 text-zinc-500 dark:text-zinc-400">
+              I work best with small teams shipping fast on messy, real-world problems. If that sounds like yours — say hi.
+            </p>
+            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+              <a
+                href={`mailto:${profile.email}`}
+                aria-label="Email me"
+                className="inline-flex size-12 items-center justify-center rounded-full bg-zinc-950 text-white transition hover:-translate-y-0.5 hover:bg-zinc-800 dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-200"
+              >
+                <Mail size={20} />
+              </a>
             </div>
           </div>
         </FadeIn>

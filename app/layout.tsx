@@ -3,6 +3,7 @@ import { DM_Sans, Space_Grotesk } from "next/font/google";
 import { GeistMono } from "geist/font/mono";
 import "./globals.css";
 import Nav from "@/components/nav";
+import Footer from "@/components/footer";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Analytics } from "@vercel/analytics/react"
 import LenisProvider from "@/components/lenis-provider";
@@ -46,6 +47,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <LenisProvider />
           <Nav />
           {children}
+          <Footer />
           <Analytics />
         </ThemeProvider>
       </body>

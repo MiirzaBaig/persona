@@ -1,12 +1,13 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { Mail, Menu, Moon, Sun, X } from "lucide-react";
+import { Copy, Mail, Menu, Moon, Send, Sun, X } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useTheme } from "./theme-provider";
 
 const navLinks = [
+  { href: "#about", label: "About" },
   { href: "#projects", label: "Work" },
   { href: "#experience", label: "Timeline" },
   { href: "#stack", label: "Stack" },
@@ -15,8 +16,15 @@ const navLinks = [
 const Nav = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [copied, setCopied] = useState(false);
   const { theme, toggleTheme, mounted } = useTheme();
   const isDark = mounted && theme === "dark";
+
+  const copyEmail = () => {
+    navigator.clipboard.writeText("mirza.devs@gmail.com");
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 24);
@@ -99,12 +107,12 @@ const Nav = () => {
             >
               {mounted && theme === "dark" ? <Sun size={17} /> : <Moon size={17} />}
             </button>
-            <a
+<a
               href="mailto:mirza.devs@gmail.com"
               className="font-display inline-flex items-center gap-2 rounded-full bg-zinc-950 px-4 py-2.5 text-sm font-semibold tracking-[-0.03em] text-white transition hover:-translate-y-0.5 hover:bg-zinc-800 dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-200"
             >
-              <Mail size={15} />
-              Hire me
+              <Send size={14} />
+              dm me
             </a>
           </div>
 
@@ -155,16 +163,27 @@ const Nav = () => {
                   </motion.div>
                 ))}
               </div>
-              <motion.a
-                href="mailto:mirza.devs@gmail.com"
+              <motion.div
                 initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.18 }}
-                className="font-display mt-4 inline-flex w-full items-center justify-center gap-2 rounded-3xl bg-zinc-950 px-5 py-4 text-sm font-semibold tracking-[-0.03em] text-white dark:bg-white dark:text-zinc-950"
+                className="mt-4 space-y-2"
               >
-                <Mail size={17} />
-                Let&apos;s talk
-              </motion.a>
+                <button
+                  onClick={copyEmail}
+                  className="font-display inline-flex w-full items-center justify-center gap-2 rounded-3xl border border-zinc-200 bg-zinc-50 px-5 py-4 text-sm font-semibold tracking-[-0.03em] text-zinc-600 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300"
+                >
+                  <Copy size={15} />
+                  {copied ? "copied!" : "mirza.devs@gmail.com"}
+                </button>
+                <a
+                  href="mailto:mirza.devs@gmail.com"
+                  className="font-display inline-flex w-full items-center justify-center gap-2 rounded-3xl bg-zinc-950 px-5 py-4 text-sm font-semibold tracking-[-0.03em] text-white dark:bg-white dark:text-zinc-950"
+                >
+                  <Send size={15} />
+                  dm me
+                </a>
+              </motion.div>
             </div>
           </motion.div>
         ) : null}
