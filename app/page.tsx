@@ -82,7 +82,7 @@ const projects = [
   {
     name: "Mathly",
     type: "Education",
-    href: "https://mathy-sigma.vercel.app/",
+    href: "https://mathbuddy.ai/",
     label: "student-first",
     vibe: "Calm UX, clear paths, no clutter tax on learners.",
     line: "Math practice platform with adaptive problems, progress tracking, and a clean student UI.",
