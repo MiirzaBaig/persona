@@ -4,7 +4,9 @@ import Image from "next/image";
 import {
   AnimatePresence,
   motion,
+  useMotionValue,
   useScroll,
+  useSpring,
   useTransform,
 } from "framer-motion";
 import HeroThree from "@/components/hero-three";
@@ -39,6 +41,7 @@ const projects = [
     name: "aithesiswriter.io",
     type: "Live SaaS",
     href: "https://aithesiswriter.io",
+    previewImage: "/previews/aithesiswriter.png",
     label: "revenue flow",
     vibe: "Built to convert, retain, and export without friction.",
     line: "Academic writing product with billing, exports, citations, and multilingual document generation.",
@@ -61,6 +64,7 @@ const projects = [
     name: "Computer Use Agent",
     type: "Automation",
     href: "https://ai-sdk-computer-use-theta-dun.vercel.app",
+    previewImage: "/previews/computer-use-agent.png",
     label: "agent loop",
     vibe: "Experimental UI, but the control surface stays readable.",
     line: "Browser-control experiment with action streaming, screenshot loops, and human checkpoints.",
@@ -115,10 +119,40 @@ const projects = [
 ];
 
 const otherWork = [
-  { name: "Avelia", href: "https://avelia.vercel.app/" },
-  { name: "Forgee", href: "https://forgee-taupe.vercel.app/" },
-  { name: "Arche", href: "https://arche-tau.vercel.app/" },
-];
+  {
+    name: "Avelia",
+    type: "UI Experiment",
+    href: "https://avelia.vercel.app/",
+    label: "interface lab",
+    vibe: "Layout and motion studies with a focus on clean hierarchy.",
+    line: "Interface exploration with refined typography, spacing, and subtle interaction patterns.",
+    stack: ["Next.js", "TypeScript", "Tailwind"],
+    accent:
+      "from-rose-500/18 via-orange-500/8 to-amber-500/16 dark:from-rose-400/16 dark:via-orange-400/8 dark:to-amber-400/16",
+  },
+  {
+    name: "Forgee",
+    type: "UI Experiment",
+    href: "https://forgee-taupe.vercel.app/",
+    label: "component craft",
+    vibe: "Component-first UI with warm tones and deliberate restraint.",
+    line: "Design-forward experiment exploring form layouts, cards, and responsive component systems.",
+    stack: ["Next.js", "React", "Tailwind"],
+    accent:
+      "from-stone-500/18 via-amber-500/8 to-orange-500/14 dark:from-stone-400/16 dark:via-amber-400/8 dark:to-orange-400/14",
+  },
+  {
+    name: "Arche",
+    type: "UI Experiment",
+    href: "https://arche-tau.vercel.app/",
+    label: "visual system",
+    vibe: "Minimal structure, strong type, and calm visual rhythm.",
+    line: "UI prototype built around grid systems, editorial layouts, and polished micro-interactions.",
+    stack: ["Next.js", "TypeScript", "CSS"],
+    accent:
+      "from-slate-500/18 via-zinc-500/8 to-neutral-500/14 dark:from-slate-400/16 dark:via-zinc-400/8 dark:to-neutral-400/14",
+  },
+] as const;
 
 const experience = [
   {
@@ -443,6 +477,175 @@ function TimelineItem({
   );
 }
 
+type Project = (typeof projects)[number] | (typeof otherWork)[number];
+
+const PREVIEW_WIDTH = 220;
+const PREVIEW_HEIGHT = 140;
+const PREVIEW_OFFSET_X = 14;
+const PREVIEW_OFFSET_Y = 18;
+
+function clampPreviewPosition(
+  clientX: number,
+  clientY: number,
+  rect: DOMRect,
+  width: number,
+  height: number,
+  offsetX: number,
+  offsetY: number,
+) {
+  const rawX = clientX - rect.left + offsetX;
+  const rawY = clientY - rect.top + offsetY;
+  const maxX = Math.max(0, rect.width - width);
+  const maxY = Math.max(0, rect.height - height);
+
+  return {
+    x: Math.min(Math.max(0, rawX), maxX),
+    y: Math.min(Math.max(0, rawY), maxY),
+  };
+}
+
+function ProjectCard({ project }: { project: Project }) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [hovered, setHovered] = useState(false);
+  const [previewLoaded, setPreviewLoaded] = useState(false);
+
+  const pointerX = useMotionValue(0);
+  const pointerY = useMotionValue(0);
+  // Softer spring = preview lags slightly behind the cursor.
+  const previewX = useSpring(pointerX, { stiffness: 220, damping: 26, mass: 0.7 });
+  const previewY = useSpring(pointerY, { stiffness: 220, damping: 26, mass: 0.7 });
+
+  const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
+    const card = cardRef.current;
+    if (!card) return;
+    const rect = card.getBoundingClientRect();
+    const { x, y } = clampPreviewPosition(
+      event.clientX,
+      event.clientY,
+      rect,
+      PREVIEW_WIDTH,
+      PREVIEW_HEIGHT,
+      PREVIEW_OFFSET_X,
+      PREVIEW_OFFSET_Y,
+    );
+    pointerX.set(x);
+    pointerY.set(y);
+  };
+
+  const handleMouseEnter = (event: React.MouseEvent<HTMLDivElement>) => {
+    const card = cardRef.current;
+    if (card) {
+      const rect = card.getBoundingClientRect();
+      const { x, y } = clampPreviewPosition(
+      event.clientX,
+      event.clientY,
+      rect,
+      PREVIEW_WIDTH,
+      PREVIEW_HEIGHT,
+      PREVIEW_OFFSET_X,
+      PREVIEW_OFFSET_Y,
+    );
+      pointerX.jump(x);
+      pointerY.jump(y);
+    }
+    setHovered(true);
+    setPreviewLoaded(true);
+  };
+
+  return (
+    <div
+      ref={cardRef}
+      className="relative h-full overflow-hidden rounded-xl"
+      onMouseEnter={handleMouseEnter}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={() => setHovered(false)}
+    >
+      <a
+        href={project.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group relative flex h-full min-h-[260px] overflow-hidden rounded-xl border border-zinc-200 bg-white p-5 transition-colors duration-150 ease-out hover:bg-zinc-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[#f8fafc] dark:border-zinc-800 dark:bg-zinc-950 dark:shadow-none dark:hover:bg-zinc-900/80 dark:focus-visible:ring-blue-400 dark:focus-visible:ring-offset-[#08090b] sm:min-h-[280px] sm:p-6"
+      >
+        <div className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${project.accent} opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100 group-focus-visible:opacity-100`} />
+
+        <div className="relative z-10 flex h-full flex-col">
+          <div className="flex items-start justify-between gap-4">
+            <div className="space-y-3">
+              <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-zinc-400 dark:text-zinc-500">
+                {project.type}
+              </span>
+              <h3 className="font-display text-lg font-semibold tracking-[-0.04em] text-zinc-950 dark:text-white sm:text-xl">
+                {project.name}
+              </h3>
+            </div>
+            <ArrowUpRight
+              size={18}
+              className="mt-1 shrink-0 text-zinc-300 transition-all duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-zinc-950 dark:text-zinc-700 dark:group-hover:text-white"
+            />
+          </div>
+
+          <p className="mt-3 text-[0.94rem] leading-relaxed text-zinc-500 dark:text-zinc-400">
+            {project.line}
+          </p>
+
+          <div className="mt-auto flex flex-wrap gap-1.5 pt-5">
+            {project.stack.map((item) => (
+              <span
+                key={item}
+                className="rounded-md bg-zinc-100 px-2 py-0.5 text-[11px] font-medium text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400"
+              >
+                {item}
+              </span>
+            ))}
+          </div>
+        </div>
+      </a>
+
+      {/* Small preview trailing slightly behind the cursor (pointer devices only).
+          Stays mounted after first hover so the iframe doesn't reload every time. */}
+      {previewLoaded ? (
+        <div className="pointer-events-none absolute inset-0 z-30 hidden overflow-hidden [@media(hover:hover)]:block">
+          <motion.div
+            initial={false}
+            animate={
+              hovered
+                ? { opacity: 1, scale: 1 }
+                : { opacity: 0, scale: 0.9 }
+            }
+            transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+            style={{
+              x: previewX,
+              y: previewY,
+              width: PREVIEW_WIDTH,
+              height: PREVIEW_HEIGHT,
+            }}
+            className="absolute left-0 top-0 origin-top-left overflow-hidden rounded-lg border border-zinc-200/90 bg-white shadow-[0_10px_28px_rgba(0,0,0,0.12)] dark:border-white/10 dark:bg-zinc-900 dark:shadow-[0_10px_28px_rgba(0,0,0,0.45)]"
+          >
+            {"previewImage" in project && project.previewImage ? (
+              <Image
+                src={project.previewImage}
+                alt={`${project.name} preview`}
+                width={PREVIEW_WIDTH}
+                height={PREVIEW_HEIGHT}
+                className="h-full w-full object-cover object-top"
+              />
+            ) : (
+              <iframe
+                src={project.href}
+                title={`${project.name} website preview`}
+                loading="lazy"
+                referrerPolicy="no-referrer"
+                tabIndex={-1}
+                className="pointer-events-none h-[560px] w-[880px] origin-top-left scale-[0.25] border-0 bg-white"
+              />
+            )}
+          </motion.div>
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
 function MagneticTag({ children }: { children: React.ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -689,62 +892,20 @@ export default function Home() {
           <div className="grid gap-3 sm:gap-4 md:grid-cols-2">
             {projects.map((project, index) => (
               <FadeIn key={project.name} delay={index * 0.03}>
-                <a
-                  href={project.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group relative flex h-full flex-col rounded-xl border border-zinc-200 bg-white p-5 transition-colors duration-150 ease-[cubic-bezier(.2,.8,.2,1)] hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950 dark:shadow-none dark:hover:bg-zinc-900/80 sm:p-6"
-                >
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="space-y-3">
-                      <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-zinc-400 dark:text-zinc-500">
-                        {project.type}
-                      </span>
-                      <h3 className="font-display text-lg font-semibold tracking-[-0.04em] text-zinc-950 dark:text-white sm:text-xl">
-                        {project.name}
-                      </h3>
-                    </div>
-                    <ArrowUpRight
-                      size={18}
-                      className="mt-1 shrink-0 text-zinc-300 transition-all duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-zinc-950 dark:text-zinc-700 dark:group-hover:text-white"
-                    />
-                  </div>
-
-                  <p className="mt-3 text-[0.94rem] leading-relaxed text-zinc-500 dark:text-zinc-400">
-                    {project.line}
-                  </p>
-
-                  <div className="mt-auto flex flex-wrap gap-1.5 pt-5">
-                    {project.stack.map((item) => (
-                      <span
-                        key={item}
-                        className="rounded-md bg-zinc-100 px-2 py-0.5 text-[11px] font-medium text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400"
-                      >
-                        {item}
-                      </span>
-                    ))}
-                  </div>
-                </a>
+                <ProjectCard project={project} />
               </FadeIn>
             ))}
           </div>
 
-          <FadeIn className="mt-8 text-center">
-            <p className="mb-3 text-sm font-medium text-zinc-400 dark:text-zinc-500">
+          <FadeIn className="mt-10">
+            <p className="mb-4 text-center text-sm font-medium text-zinc-400 dark:text-zinc-500">
               Other experiments &amp; UI work
             </p>
-            <div className="flex flex-wrap justify-center gap-2">
-              {otherWork.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-1.5 rounded-full border border-zinc-200 bg-white px-4 py-2 text-sm font-medium text-zinc-600 transition hover:-translate-y-0.5 hover:border-zinc-300 hover:text-zinc-950 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-400 dark:hover:border-zinc-700 dark:hover:text-white"
-                >
-                  {item.name}
-                  <ArrowUpRight size={13} className="text-zinc-400 transition group-hover:text-zinc-950 dark:group-hover:text-white" />
-                </a>
+            <div className="grid gap-3 sm:gap-4 md:grid-cols-2">
+              {otherWork.map((project, index) => (
+                <FadeIn key={project.name} delay={index * 0.03}>
+                  <ProjectCard project={project} />
+                </FadeIn>
               ))}
             </div>
           </FadeIn>
