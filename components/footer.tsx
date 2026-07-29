@@ -14,7 +14,7 @@ const socialLinks = [
 
 const Footer = () => {
   return (
-    <footer className="border-t border-zinc-200 bg-white dark:border-zinc-800 dark:bg-[#08090b]">
+    <footer>
       <div className="mx-auto max-w-6xl px-6 py-8">
         <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
           <span className="font-display text-sm font-medium tracking-[-0.03em] text-zinc-500 dark:text-zinc-400">

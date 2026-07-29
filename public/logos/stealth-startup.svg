@@ -1,0 +1,9 @@
+<svg width="45" height="45" viewBox="0 0 33 45" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Sherry">
+  <path d="M25.1669 17.1193H32.9997C33.0519 7.67303 25.6456 0 16.5 0C7.35436 0 -0.0502972 7.67303 0.000257334 17.1193L10.2533 24.085C11.9153 25.2144 11.1396 27.8807 9.15063 27.8807H0.000257334C-0.0502972 37.327 7.35594 45 16.5 45C25.644 45 33.0519 37.327 32.9997 27.8807L23.9584 20.8384C22.4228 19.6422 23.2427 17.1193 25.1669 17.1193Z" fill="url(#paint0_linear)"/>
+  <defs>
+    <linearGradient id="paint0_linear" x1="3.536" y1="1.25" x2="35.2363" y2="40.7033" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1A49A5"/>
+      <stop offset="1" stop-color="#2F6CE4"/>
+    </linearGradient>
+  </defs>
+</svg>
