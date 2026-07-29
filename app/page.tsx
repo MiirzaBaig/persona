@@ -5,6 +5,7 @@ import {
   AnimatePresence,
   motion,
   useMotionValue,
+  useMotionValueEvent,
   useScroll,
   useSpring,
   useTransform,
@@ -37,6 +38,18 @@ const headlines = [
 ];
 
 const projects = [
+  {
+    name: "Revise",
+    type: "AI Document Editor",
+    status: "In progress",
+    href: "https://revise.example.com",
+    label: "retrieval core",
+    vibe: "Every edit deserves your approval — nothing moves without it.",
+    line: "AI document platform for retrieval-heavy workflows — reads long documents, discusses them in context, and proposes changes as tracked, reviewable edits with full revision history.",
+    stack: ["Next.js", "TypeScript", "RAG", "Vector DB"],
+    accent:
+      "from-indigo-500/20 via-blue-500/10 to-slate-500/18 dark:from-indigo-400/18 dark:via-blue-400/10 dark:to-slate-400/16",
+  },
   {
     name: "aithesiswriter.io",
     type: "Live SaaS",
@@ -161,7 +174,7 @@ const experience = [
     type: "",
     period: "Apr 2026 - Present",
     place: "Remote, Estonia",
-    line: "Owning full-stack feature delivery across the core product — shipped auth overhaul, optimized API response times, and built internal tooling that cut deploy cycles.",
+    line: "Driving full-stack delivery on the core product end to end — shipped a ground-up auth overhaul, cut API response times, and built internal tooling that made deploys faster and way less painful for the whole team.",
     stack: ["TypeScript", "Node.js", "React", "AWS"],
   },
   {
@@ -170,7 +183,7 @@ const experience = [
     type: "",
     period: "May 2026 - Present",
     place: "Remote, UAE",
-    line: "Architecting the security layer and smart contract infrastructure from scratch — built the monitoring pipeline, wallet integration flows, and on-chain alerting system.",
+    line: "Founding engineer building the security layer and smart-contract infra from zero — designed the on-chain monitoring pipeline, wallet integration flows, and a real-time alerting system that catches threats before they hit users.",
     stack: ["Web3", "Solidity", "TypeScript", "Blockchain"],
   },
   {
@@ -179,7 +192,7 @@ const experience = [
     type: "",
     period: "Oct 2025 - Jun 2026",
     place: "Remote, UAE",
-    line: "Built the M&A deal room platform end-to-end — document workflows, role-based access, real-time collaboration, and secure file sharing used by active deal teams.",
+    line: "Shipped an M&A deal-room platform end to end — document workflows, granular role-based access, real-time collaboration, and locked-down file sharing that active deal teams now run their live transactions on.",
     stack: ["Next.js", "TypeScript", "Tailwind", "AWS"],
   },
   {
@@ -188,7 +201,7 @@ const experience = [
     type: "",
     period: "Nov 2025 - May 2026",
     place: "Remote, South Korea",
-    line: "Owned the commerce engine — rebuilt transaction flows that cut processing time by 3x, resolved critical payment reliability issues in production.",
+    line: "Owned the commerce engine solo — rebuilt transaction flows to run 3× faster and hunted down the payment-reliability bugs that were silently dropping revenue in production.",
     stack: ["Next.js", "TypeScript", "Node.js", "PostgreSQL"],
   },
   {
@@ -197,7 +210,7 @@ const experience = [
     type: "",
     period: "Mar 2025 - Sep 2025",
     place: "Remote",
-    line: "Selected for McKinsey's competitive Forward Program — developed structured problem-solving and stakeholder communication skills applied to real business cases.",
+    line: "Handpicked for McKinsey's highly selective Forward Program — sharpened structured problem-solving and executive-level communication, then applied both to real business cases alongside a global cohort.",
     stack: ["Strategy", "Leadership", "Problem Solving"],
   },
   {
@@ -206,7 +219,7 @@ const experience = [
     type: "",
     period: "Jan 2025 - Jun 2025",
     place: "Remote, UK",
-    line: "Redesigned the student-facing interface — built a reusable component library, improved mobile responsiveness, and reduced page load times across education workflows.",
+    line: "Rebuilt the student-facing experience from the ground up — shipped a reusable component library, nailed mobile responsiveness, and trimmed page load times to keep learners focused instead of waiting.",
     stack: ["React", "TypeScript", "Redux", "REST"],
   },
   {
@@ -215,7 +228,7 @@ const experience = [
     type: "",
     period: "Aug 2024 - Dec 2024",
     place: "Remote, India",
-    line: "Maintained and extended Node.js APIs handling auth, partner integrations, and data pipelines — shipped webhook infrastructure and improved query performance.",
+    line: "Kept the backend humming — extended Node.js APIs powering auth, partner integrations, and data pipelines, shipped the webhook infrastructure, and tuned queries so the whole system stayed fast under real load.",
     stack: ["Node.js", "Express", "REST", "Databases"],
   },
 ];
@@ -384,6 +397,94 @@ function useRotatingText(items: string[]) {
   return items[index];
 }
 
+// Derive a compact monogram (max 2 chars) from a company name.
+function monogram(company: string) {
+  const words = company
+    .replace(/[^a-zA-Z0-9 ]/g, " ")
+    .split(" ")
+    .filter(Boolean);
+  if (words.length === 0) return "•";
+  if (words.length === 1) return words[0].slice(0, 2).toUpperCase();
+  return (words[0][0] + words[1][0]).toUpperCase();
+}
+
+// Local SVG logos dropped into /public/logos — highest priority. Add a company
+// here (name -> path) to use its real logo instead of the favicon/monogram.
+const COMPANY_LOGOS: Record<string, string> = {
+  exzyt: "/logos/exzyt.svg",
+  "Cardinal Web 3": "/logos/cardinal.svg",
+  "Stealth Startup": "/logos/stealth-startup.svg",
+  "McKinsey & Company": "/logos/mckinsey.svg",
+  Datapoint: "/logos/datapoint.svg",
+  Minimalisticlearning: "/logos/minimalisticlearning.svg",
+};
+
+// Logos that carry their own background and should fill the badge edge-to-edge
+// (cover) rather than sit padded inside it (contain).
+const FULL_BLEED_LOGOS = new Set<string>([
+  "McKinsey & Company",
+  "Minimalisticlearning",
+]);
+
+// Wide wordmark logos — the badge widens to a pill so the full mark stays legible.
+const WORDMARK_LOGOS = new Set<string>(["Datapoint"]);
+
+// Icon marks that should fill the badge edge-to-edge over a light surface
+// (so transparent areas read as white, not the page background).
+const FILL_CONTAIN_LOGOS = new Set<string>([
+  "Cardinal Web 3",
+  "Stealth Startup",
+  "PureSoft Labs OÜ",
+]);
+
+// Real brand icons via Google's favicon CDN (token-free) for companies with a
+// public site; anything without a local SVG or domain falls back to a monogram.
+const COMPANY_DOMAINS: Record<string, string> = {
+  "PureSoft Labs OÜ": "plou.eu",
+};
+
+function faviconUrl(domain: string) {
+  return `https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
+}
+
+// A single logo badge — local SVG first, then favicon CDN, then a monogram.
+function CompanyLogo({ company }: { company: string }) {
+  const localSvg = COMPANY_LOGOS[company];
+  const domain = COMPANY_DOMAINS[company];
+  const [imgOk, setImgOk] = useState(true);
+
+  const src = localSvg ?? (domain ? faviconUrl(domain) : null);
+  const fullBleed = FULL_BLEED_LOGOS.has(company);
+  const wordmark = WORDMARK_LOGOS.has(company);
+
+  if (src && imgOk) {
+    let className = "size-7 rounded-md object-contain";
+    if (fullBleed) className = "size-full object-cover";
+    else if (wordmark) className = "h-6 w-full object-contain";
+    else if (FILL_CONTAIN_LOGOS.has(company))
+      className = `size-full object-contain ${
+        company === "Stealth Startup" ? "scale-100" : "scale-[1.18]"
+      }`;
+
+    return (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        src={src}
+        alt={`${company} logo`}
+        loading="lazy"
+        onError={() => setImgOk(false)}
+        className={className}
+      />
+    );
+  }
+
+  return (
+    <span className="flex size-7 items-center justify-center rounded-md bg-gradient-to-br from-blue-500 to-indigo-500 font-mono text-[10px] font-bold tracking-tight text-white dark:from-blue-400 dark:to-indigo-400">
+      {monogram(company)}
+    </span>
+  );
+}
+
 function TimelineExperience({
   experience,
 }: {
@@ -403,15 +504,64 @@ function TimelineExperience({
     offset: ["start 80%", "end 60%"],
   });
 
+  // Map scroll progress -> which company we're currently on, so the badge that
+  // rides the progress point can swap to that company's logo as we scroll.
+  const [activeIndex, setActiveIndex] = useState(0);
+  useMotionValueEvent(scrollYProgress, "change", (p) => {
+    const next = Math.min(
+      experience.length - 1,
+      Math.max(0, Math.floor(p * experience.length)),
+    );
+    setActiveIndex(next);
+  });
+
+  const activeCompany = experience[activeIndex]?.company ?? experience[0].company;
+  const badgeTop = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+
   return (
     <div ref={timelineRef} className="relative mx-auto max-w-4xl">
-      {/* Background track line */}
-      <div className="absolute left-0 top-0 h-full w-px bg-zinc-200 dark:bg-zinc-800" />
-      {/* Animated progress line */}
+      {/* Single clean track line with a blue fill that grows on scroll. */}
+      <div className="absolute left-0 top-0 h-full w-px bg-zinc-200 dark:bg-zinc-800">
+        <motion.div
+          className="absolute inset-x-0 top-0 w-px origin-top bg-blue-500 dark:bg-blue-400"
+          style={{ height: "100%", scaleY: scrollYProgress }}
+        />
+      </div>
+
+      {/* Logo slider — a badge pinned to the moving progress point whose logo
+          cross-fades to the current company as the timeline scrolls. */}
       <motion.div
-        className="absolute left-0 top-0 w-px origin-top bg-blue-500 dark:bg-blue-400"
-        style={{ height: "100%", scaleY: scrollYProgress }}
-      />
+        aria-hidden
+        className="pointer-events-none absolute left-0 z-20 flex justify-center"
+        style={{ top: badgeTop, x: "-50%" }}
+      >
+        {/* Soft glow halo so the badge reads as a deliberate focal point. */}
+        <div className="absolute left-1/2 top-1/2 size-14 -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-500/20 blur-lg dark:bg-blue-400/20" />
+        <div
+          className={`relative flex h-10 items-center justify-center overflow-hidden rounded-xl ring-1 ring-black/5 shadow-[0_6px_20px_rgba(37,99,235,0.18)] transition-[width] duration-300 dark:ring-white/10 dark:shadow-[0_6px_22px_rgba(37,99,235,0.35)] ${
+            WORDMARK_LOGOS.has(activeCompany) ? "w-28" : "w-10"
+          } ${
+            FULL_BLEED_LOGOS.has(activeCompany)
+              ? ""
+              : FILL_CONTAIN_LOGOS.has(activeCompany)
+                ? "border border-zinc-200 bg-white dark:border-zinc-700 dark:bg-zinc-900"
+                : "border border-zinc-200 bg-white px-1.5 dark:border-zinc-700 dark:bg-zinc-900"
+          }`}
+        >
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeCompany}
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.5 }}
+              transition={{ type: "spring", stiffness: 400, damping: 20 }}
+              className="flex size-full items-center justify-center"
+            >
+              <CompanyLogo company={activeCompany} />
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </motion.div>
 
       {experience.map((job, index) => (
         <TimelineItem key={`${job.company}-${job.period}`} job={job} index={index} />
@@ -419,6 +569,26 @@ function TimelineExperience({
     </div>
   );
 }
+
+// Shared pop-in variants for a timeline card's sequenced children.
+const timelineChildVariants = {
+  hidden: { opacity: 0, y: 16 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { type: "spring", stiffness: 140, damping: 18 },
+  },
+} as const;
+
+const timelinePillVariants = {
+  hidden: { opacity: 0, y: 10, scale: 0.85 },
+  show: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { type: "spring", stiffness: 300, damping: 20 },
+  },
+} as const;
 
 function TimelineItem({
   job,
@@ -442,18 +612,28 @@ function TimelineItem({
   });
   const dotScale = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
   const dotOpacity = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
-  const contentY = useTransform(scrollYProgress, [0, 0.4], [30, 0]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.4], [0, 1]);
 
   return (
-    <div ref={itemRef} className="relative pb-14 pl-7 last:pb-0">
+    <div ref={itemRef} className="relative pb-20 pl-8 last:pb-0 sm:pb-24">
       {/* Animated dot */}
       <motion.span
         className="absolute -left-[5px] top-2 size-2.5 rounded-full bg-blue-500 ring-4 ring-white dark:bg-blue-400 dark:ring-[#0b0d12]"
         style={{ scale: dotScale, opacity: dotOpacity }}
       />
-      <motion.div style={{ y: contentY, opacity: contentOpacity }}>
-        <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
+      {/* Contents pop in once, sequenced: header -> description -> pills. */}
+      <motion.div
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "0px 0px -15% 0px" }}
+        variants={{
+          hidden: {},
+          show: { transition: { staggerChildren: 0.07, delayChildren: 0.05 } },
+        }}
+      >
+        <motion.div
+          variants={timelineChildVariants}
+          className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between"
+        >
           <div>
             <h3 className="font-display text-xl font-semibold tracking-[-0.04em] text-zinc-950 dark:text-white">
               {job.role}
@@ -463,15 +643,26 @@ function TimelineItem({
             </p>
           </div>
           <p className="font-mono text-sm text-zinc-500">{job.period}</p>
-        </div>
-        <p className="mt-4 max-w-3xl text-base leading-7 text-zinc-600 dark:text-zinc-400">
+        </motion.div>
+        <motion.p
+          variants={timelineChildVariants}
+          className="mt-4 max-w-3xl text-base leading-7 text-zinc-600 dark:text-zinc-400"
+        >
           {job.line}
-        </p>
-        <div className="mt-4 flex flex-wrap gap-2">
+        </motion.p>
+        <motion.div
+          variants={{
+            hidden: {},
+            show: { transition: { staggerChildren: 0.05 } },
+          }}
+          className="mt-4 flex flex-wrap gap-2"
+        >
           {job.stack.map((item) => (
-            <Pill key={item}>{item}</Pill>
+            <motion.div key={item} variants={timelinePillVariants}>
+              <Pill>{item}</Pill>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </motion.div>
     </div>
   );
@@ -571,9 +762,20 @@ function ProjectCard({ project }: { project: Project }) {
         <div className="relative z-10 flex h-full flex-col">
           <div className="flex items-start justify-between gap-4">
             <div className="space-y-3">
-              <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-zinc-400 dark:text-zinc-500">
-                {project.type}
-              </span>
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-zinc-400 dark:text-zinc-500">
+                  {project.type}
+                </span>
+                {"status" in project && project.status ? (
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500 px-2.5 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.14em] text-white shadow-[0_0_0_1px_rgba(16,185,129,0.35),0_2px_8px_rgba(16,185,129,0.35)] dark:bg-emerald-500 dark:text-white">
+                    <span className="relative flex h-2 w-2">
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-80" />
+                      <span className="relative inline-flex h-2 w-2 rounded-full bg-white" />
+                    </span>
+                    {project.status}
+                  </span>
+                ) : null}
+              </div>
               <h3 className="font-display text-lg font-semibold tracking-[-0.04em] text-zinc-950 dark:text-white sm:text-xl">
                 {project.name}
               </h3>
@@ -781,9 +983,8 @@ export default function Home() {
     <main className="min-h-screen overflow-hidden bg-[#f8fafc] text-zinc-950 dark:bg-[#08090b] dark:text-zinc-50">
       <section
         ref={heroRef}
-        className="relative flex min-h-screen items-center border-b border-zinc-200 bg-white pt-24 dark:border-zinc-900 dark:bg-[#08090b]"
+        className="relative flex min-h-screen items-center pt-24"
       >
-        <div className="absolute inset-x-0 top-0 h-64 bg-[linear-gradient(180deg,rgba(37,99,235,0.09),transparent)] dark:bg-[linear-gradient(180deg,rgba(96,165,250,0.12),transparent)]" />
         <HeroThree />
         <motion.div
           style={{ opacity: heroOpacity, y: heroY }}
@@ -813,7 +1014,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.18 }}
-              className="mt-7 h-10 overflow-hidden sm:mt-9 sm:h-12 md:h-14"
+              className="mt-7 h-11 overflow-hidden sm:mt-9 sm:h-14 md:h-16"
             >
               <AnimatePresence mode="wait">
                 <motion.p
@@ -842,7 +1043,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.32 }}
-              className="mt-7 flex flex-wrap items-center gap-3 sm:mt-9"
+              className="mt-8 flex flex-wrap items-center gap-x-3 gap-y-4 sm:mt-10"
             >
               <a
                 href={`mailto:${profile.email}`}
@@ -867,7 +1068,7 @@ export default function Home() {
         </motion.div>
       </section>
 
-      <section id="about" className="border-b border-zinc-200 bg-white px-4 py-14 dark:border-zinc-900 dark:bg-[#0b0d12] sm:px-6 md:py-24">
+      <section id="about" className="px-4 py-14 sm:px-6 md:py-24">
         <FadeIn className="mx-auto max-w-3xl text-center">
           <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.24em] text-blue-600 dark:text-blue-400">
             about
@@ -912,7 +1113,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="experience" className="border-y border-zinc-200 bg-white px-4 py-14 dark:border-zinc-900 dark:bg-[#0b0d12] sm:px-6 md:py-28">
+      <section id="experience" className="px-4 py-14 sm:px-6 md:py-28">
         <div className="mx-auto max-w-6xl">
           <SectionTitle
             label="timeline"
