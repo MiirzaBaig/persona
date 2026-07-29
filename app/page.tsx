@@ -530,10 +530,12 @@ function TimelineExperience({
 
       {/* Logo slider — a badge pinned to the moving progress point whose logo
           cross-fades to the current company as the timeline scrolls. */}
+      {/* Riding badge is decorative — hidden on mobile where there isn't room
+          for it to sit on the line without overlapping the role text. */}
       <motion.div
         aria-hidden
-        className="pointer-events-none absolute left-0 z-20 flex justify-center"
-        style={{ top: badgeTop, x: "-50%" }}
+        className="pointer-events-none absolute left-0 z-20 hidden -translate-x-1/2 justify-center sm:flex"
+        style={{ top: badgeTop }}
       >
         {/* Soft glow halo so the badge reads as a deliberate focal point. */}
         <div className="absolute left-1/2 top-1/2 size-14 -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-500/20 blur-lg dark:bg-blue-400/20" />
