@@ -29,9 +29,12 @@ const Footer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={link.label}
-                className="inline-flex size-9 items-center justify-center rounded-full text-zinc-400 transition-colors hover:text-zinc-900 dark:text-zinc-500 dark:hover:text-white"
+                className="group inline-flex size-8 items-center justify-center rounded-full text-zinc-400 transition-colors hover:text-zinc-900 dark:text-zinc-500 dark:hover:text-white"
               >
-                <link.icon size={17} />
+                <link.icon
+                  size={16}
+                  className="group-hover:animate-icon-pop"
+                />
               </Link>
             ))}
           </div>

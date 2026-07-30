@@ -13,6 +13,7 @@ import {
 import HeroThree from "@/components/hero-three";
 import {
   ArrowUpRight,
+  Download,
   Github,
   Globe2,
   Linkedin,
@@ -1049,17 +1050,34 @@ export default function Home() {
             >
               <a
                 href={`mailto:${profile.email}`}
-                className="font-display inline-flex items-center justify-center gap-2 rounded-full bg-zinc-950 px-5 py-3 text-sm font-semibold tracking-[-0.03em] text-white transition hover:-translate-y-0.5 hover:bg-zinc-800 dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-200"
+                className="font-display group inline-flex items-center justify-center gap-1.5 rounded-full bg-zinc-950 px-3.5 py-2 text-[0.8rem] font-semibold tracking-[-0.03em] text-white transition hover:-translate-y-0.5 hover:bg-zinc-800 dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-200"
               >
-                <Mail size={17} />
+                <Mail
+                  size={15}
+                  className="group-hover:animate-icon-lift"
+                />
                 Let&apos;s talk
               </a>
               <a
                 href="#projects"
-                className="font-display inline-flex items-center justify-center gap-2 rounded-full border border-zinc-300 bg-white px-5 py-3 text-sm font-semibold tracking-[-0.03em] text-zinc-950 transition hover:-translate-y-0.5 hover:border-zinc-950 dark:border-zinc-800 dark:bg-zinc-950 dark:text-white dark:hover:border-zinc-500"
+                className="font-display group inline-flex items-center justify-center gap-1.5 rounded-full border border-zinc-300 bg-white px-3.5 py-2 text-[0.8rem] font-semibold tracking-[-0.03em] text-zinc-950 transition hover:-translate-y-0.5 hover:border-zinc-950 dark:border-zinc-800 dark:bg-zinc-950 dark:text-white dark:hover:border-zinc-500"
               >
                 See the work
-                <ArrowUpRight size={16} />
+                <ArrowUpRight
+                  size={14}
+                  className="group-hover:animate-icon-arrow"
+                />
+              </a>
+              <a
+                href="/Mirza-Ismail-Baig-CV.pdf"
+                download
+                className="font-display group inline-flex items-center justify-center gap-1.5 rounded-full px-3 py-2 text-[0.8rem] font-semibold tracking-[-0.03em] text-zinc-500 transition hover:text-zinc-950 dark:text-zinc-500 dark:hover:text-white"
+              >
+                <Download
+                  size={14}
+                  className="group-hover:animate-icon-download"
+                />
+                Download CV
               </a>
               <span className="hidden h-5 w-px bg-zinc-300 dark:bg-zinc-700 sm:block" />
               <span className="font-mono text-[11px] font-medium uppercase tracking-[0.12em] text-zinc-400 dark:text-zinc-500">
@@ -1181,9 +1199,9 @@ export default function Home() {
               <a
                 href={`mailto:${profile.email}`}
                 aria-label="Email me"
-                className="inline-flex size-12 items-center justify-center rounded-full bg-zinc-950 text-white transition hover:-translate-y-0.5 hover:bg-zinc-800 dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-200"
+                className="group inline-flex size-11 items-center justify-center rounded-full bg-zinc-950 text-white transition hover:-translate-y-0.5 hover:bg-zinc-800 dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-200"
               >
-                <Mail size={20} />
+                <Mail size={19} className="group-hover:animate-icon-lift" />
               </a>
             </div>
           </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { Copy, Mail, Menu, Moon, Send, Sun, X } from "lucide-react";
+import { Copy, Download, Mail, Menu, Moon, Send, Sun, X } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useTheme } from "./theme-provider";
@@ -107,11 +107,22 @@ const Nav = () => {
             >
               {mounted && theme === "dark" ? <Sun size={17} /> : <Moon size={17} />}
             </button>
-<a
-              href="mailto:mirza.devs@gmail.com"
-              className="font-display inline-flex items-center gap-2 rounded-full bg-zinc-950 px-4 py-2.5 text-sm font-semibold tracking-[-0.03em] text-white transition hover:-translate-y-0.5 hover:bg-zinc-800 dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-200"
+            <a
+              href="/Mirza-Ismail-Baig-CV.pdf"
+              download
+              className="font-display group inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-[0.8rem] font-semibold tracking-[-0.03em] text-zinc-500 transition hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-white"
             >
-              <Send size={14} />
+              <Download
+                size={14}
+                className="group-hover:animate-icon-download"
+              />
+              grab my CV
+            </a>
+            <a
+              href="mailto:mirza.devs@gmail.com"
+              className="font-display group inline-flex items-center gap-2 rounded-full bg-zinc-950 px-4 py-2.5 text-sm font-semibold tracking-[-0.03em] text-white transition hover:-translate-y-0.5 hover:bg-zinc-800 dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-200"
+            >
+              <Send size={14} className="group-hover:animate-icon-send" />
               dm me
             </a>
           </div>
@@ -177,10 +188,19 @@ const Nav = () => {
                   {copied ? "copied!" : "mirza.devs@gmail.com"}
                 </button>
                 <a
-                  href="mailto:mirza.devs@gmail.com"
-                  className="font-display inline-flex w-full items-center justify-center gap-2 rounded-3xl bg-zinc-950 px-5 py-4 text-sm font-semibold tracking-[-0.03em] text-white dark:bg-white dark:text-zinc-950"
+                  href="/Mirza-Ismail-Baig-CV.pdf"
+                  download
+                  className="font-display group inline-flex w-full items-center justify-center gap-2 rounded-3xl border border-zinc-200 bg-zinc-50 px-5 py-4 text-sm font-semibold tracking-[-0.03em] text-zinc-600 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300"
+                  onClick={() => setIsOpen(false)}
                 >
-                  <Send size={15} />
+                  <Download size={15} className="group-hover:animate-icon-download" />
+                  grab my CV
+                </a>
+                <a
+                  href="mailto:mirza.devs@gmail.com"
+                  className="font-display group inline-flex w-full items-center justify-center gap-2 rounded-3xl bg-zinc-950 px-5 py-4 text-sm font-semibold tracking-[-0.03em] text-white dark:bg-white dark:text-zinc-950"
+                >
+                  <Send size={15} className="group-hover:animate-icon-send" />
                   dm me
                 </a>
               </motion.div>
