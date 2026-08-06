@@ -1,23 +1,22 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { Copy, Download, Mail, Menu, Moon, Send, Sun, X } from "lucide-react";
+import { Copy, Download, Menu, Moon, Send, Sun, X } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useTheme } from "./theme-provider";
-
-const navLinks = [
-  { href: "#about", label: "About" },
-  { href: "#projects", label: "Work" },
-  { href: "#experience", label: "Timeline" },
-  { href: "#stack", label: "Stack" },
-];
+import { useLanguage } from "./language-provider";
+import LanguageToggle from "./language-toggle";
+import { nav as navCopy } from "@/lib/i18n";
 
 const Nav = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [copied, setCopied] = useState(false);
   const { theme, toggleTheme, mounted } = useTheme();
+  const { lang } = useLanguage();
+  const t = navCopy[lang];
+  const navLinks = t.links;
   const isDark = mounted && theme === "dark";
 
   const copyEmail = () => {
@@ -100,10 +99,11 @@ const Nav = () => {
           </div>
 
           <div className="hidden items-center gap-2 md:flex">
+            <LanguageToggle />
             <button
               onClick={toggleTheme}
               className="inline-flex size-10 items-center justify-center rounded-full text-zinc-600 transition hover:bg-zinc-100 hover:text-zinc-950 dark:text-zinc-400 dark:hover:bg-zinc-900 dark:hover:text-white"
-              aria-label="Toggle theme"
+              aria-label={t.toggleTheme}
             >
               {mounted && theme === "dark" ? <Sun size={17} /> : <Moon size={17} />}
             </button>
@@ -116,29 +116,30 @@ const Nav = () => {
                 size={14}
                 className="group-hover:animate-icon-download"
               />
-              grab my CV
+              {t.grabCv}
             </a>
             <a
               href="mailto:mirza.devs@gmail.com"
               className="font-display group inline-flex items-center gap-2 rounded-full bg-zinc-950 px-4 py-2.5 text-sm font-semibold tracking-[-0.03em] text-white transition hover:-translate-y-0.5 hover:bg-zinc-800 dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-200"
             >
-              <Send size={14} className="group-hover:animate-icon-send" />
-              dm me
+              <Send size={14} className="group-hover:animate-icon-send rtl:-scale-x-100" />
+              {t.dmMe}
             </a>
           </div>
 
           <div className="flex items-center gap-1 md:hidden">
+            <LanguageToggle />
             <button
               onClick={toggleTheme}
               className="inline-flex size-10 items-center justify-center rounded-full text-zinc-600 transition hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-900"
-              aria-label="Toggle theme"
+              aria-label={t.toggleTheme}
             >
               {mounted && theme === "dark" ? <Sun size={17} /> : <Moon size={17} />}
             </button>
             <button
               onClick={() => setIsOpen((value) => !value)}
               className="inline-flex size-10 items-center justify-center rounded-full text-zinc-600 transition hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-900"
-              aria-label="Toggle navigation"
+              aria-label={t.toggleNav}
             >
               {isOpen ? <X size={19} /> : <Menu size={19} />}
             </button>
@@ -185,7 +186,7 @@ const Nav = () => {
                   className="font-display inline-flex w-full items-center justify-center gap-2 rounded-3xl border border-zinc-200 bg-zinc-50 px-5 py-4 text-sm font-semibold tracking-[-0.03em] text-zinc-600 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300"
                 >
                   <Copy size={15} />
-                  {copied ? "copied!" : "mirza.devs@gmail.com"}
+                  {copied ? t.copied : "mirza.devs@gmail.com"}
                 </button>
                 <a
                   href="/Mirza-Ismail-Baig-CV.pdf"
@@ -194,14 +195,14 @@ const Nav = () => {
                   onClick={() => setIsOpen(false)}
                 >
                   <Download size={15} className="group-hover:animate-icon-download" />
-                  grab my CV
+                  {t.grabCv}
                 </a>
                 <a
                   href="mailto:mirza.devs@gmail.com"
                   className="font-display group inline-flex w-full items-center justify-center gap-2 rounded-3xl bg-zinc-950 px-5 py-4 text-sm font-semibold tracking-[-0.03em] text-white dark:bg-white dark:text-zinc-950"
                 >
-                  <Send size={15} className="group-hover:animate-icon-send" />
-                  dm me
+                  <Send size={15} className="group-hover:animate-icon-send rtl:-scale-x-100" />
+                  {t.dmMe}
                 </a>
               </motion.div>
             </div>

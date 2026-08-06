@@ -1,5 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import { Github, Linkedin, Mail, Twitter } from "lucide-react";
+import { useLanguage } from "./language-provider";
+import { footer as footerCopy } from "@/lib/i18n";
 
 const socialLinks = [
   { href: "https://github.com/MiirzaBaig", label: "GitHub", icon: Github },
@@ -13,12 +17,14 @@ const socialLinks = [
 ];
 
 const Footer = () => {
+  const { lang } = useLanguage();
+
   return (
     <footer>
       <div className="mx-auto max-w-6xl px-6 py-8">
         <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
           <span className="font-display text-sm font-medium tracking-[-0.03em] text-zinc-500 dark:text-zinc-400">
-            still shipping.
+            {footerCopy[lang].tagline}
           </span>
 
           <div className="flex items-center gap-1">

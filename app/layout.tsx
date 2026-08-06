@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { DM_Sans, Space_Grotesk } from "next/font/google";
+import { DM_Sans, Space_Grotesk, IBM_Plex_Sans_Arabic } from "next/font/google";
 import { GeistMono } from "geist/font/mono";
 import "./globals.css";
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
 import { ThemeProvider } from "@/components/theme-provider";
+import { LanguageProvider } from "@/components/language-provider";
 import { Analytics } from "@vercel/analytics/react"
 import LenisProvider from "@/components/lenis-provider";
 
@@ -16,6 +17,12 @@ const dmSans = DM_Sans({
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-space-grotesk",
+});
+
+const ibmPlexArabic = IBM_Plex_Sans_Arabic({
+  subsets: ["arabic"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-arabic",
 });
 
 export const metadata: Metadata = {
@@ -41,14 +48,16 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${dmSans.variable} ${spaceGrotesk.variable} ${GeistMono.variable} font-sans antialiased`}>
+    <html lang="en" dir="ltr" suppressHydrationWarning>
+      <body className={`${dmSans.variable} ${spaceGrotesk.variable} ${GeistMono.variable} ${ibmPlexArabic.variable} font-sans antialiased`}>
         <ThemeProvider>
-          <LenisProvider />
-          <Nav />
-          {children}
-          <Footer />
-          <Analytics />
+          <LanguageProvider>
+            <LenisProvider />
+            <Nav />
+            {children}
+            <Footer />
+            <Analytics />
+          </LanguageProvider>
         </ThemeProvider>
       </body>
     </html>

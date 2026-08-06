@@ -20,6 +20,20 @@ import {
   Mail,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { useLanguage } from "@/components/language-provider";
+import {
+  headlines,
+  hero as heroCopy,
+  about as aboutCopy,
+  sections as sectionCopy,
+  projects,
+  otherWork,
+  experience,
+  statusLabel,
+  type Language,
+  type Project as ProjectData,
+  type Experience as ExperienceData,
+} from "@/lib/i18n";
 
 const profile = {
   name: "Mirza Baig",
@@ -28,211 +42,6 @@ const profile = {
   linkedin: "https://www.linkedin.com/in/mirza-baig-590b1826b/",
   saas: "https://aithesiswriter.io",
 };
-
-const headlines = [
-  "Shipping mode, always.",
-  "50 agents running. One human reviewing.",
-  "Backend brain. Frontend taste.",
-  "Web3 dashboards without the chaos.",
-  "Fast builds. Clean commits.",
-  "Less yap. More deploys.",
-];
-
-const projects = [
-  {
-    name: "Revise",
-    type: "AI Document Editor",
-    status: "In progress",
-    href: "https://revise.example.com",
-    label: "retrieval core",
-    vibe: "Every edit deserves your approval — nothing moves without it.",
-    line: "AI document platform for retrieval-heavy workflows — reads long documents, discusses them in context, and proposes changes as tracked, reviewable edits with full revision history.",
-    stack: ["Next.js", "TypeScript", "RAG", "Vector DB"],
-    accent:
-      "from-indigo-500/20 via-blue-500/10 to-slate-500/18 dark:from-indigo-400/18 dark:via-blue-400/10 dark:to-slate-400/16",
-  },
-  {
-    name: "aithesiswriter.io",
-    type: "Live SaaS",
-    href: "https://aithesiswriter.io",
-    previewImage: "/previews/aithesiswriter.png",
-    label: "revenue flow",
-    vibe: "Built to convert, retain, and export without friction.",
-    line: "Academic writing product with billing, exports, citations, and multilingual document generation.",
-    stack: ["Next.js", "TypeScript", "Stripe", "Supabase"],
-    accent:
-      "from-sky-500/20 via-blue-500/10 to-cyan-500/20 dark:from-sky-400/18 dark:via-blue-400/10 dark:to-cyan-400/18",
-  },
-  {
-    name: "Tokamak Chain Monitor",
-    type: "Observability",
-    href: "https://tokamak-chain-monitor.vercel.app/chains",
-    label: "ops core",
-    vibe: "Dense data, fast scanning, zero dashboard soup.",
-    line: "L2 monitoring dashboard with live chain health, fee trends, fallback RPCs, and PDF reporting.",
-    stack: ["Next.js 15", "Viem", "TanStack Query", "Tailwind"],
-    accent:
-      "from-emerald-500/18 via-teal-500/8 to-cyan-500/18 dark:from-emerald-400/16 dark:via-teal-400/8 dark:to-cyan-400/16",
-  },
-  {
-    name: "Computer Use Agent",
-    type: "Automation",
-    href: "https://ai-sdk-computer-use-theta-dun.vercel.app",
-    previewImage: "/previews/computer-use-agent.png",
-    label: "agent loop",
-    vibe: "Experimental UI, but the control surface stays readable.",
-    line: "Browser-control experiment with action streaming, screenshot loops, and human checkpoints.",
-    stack: ["Next.js", "TypeScript", "Vercel"],
-    accent:
-      "from-fuchsia-500/20 via-pink-500/10 to-rose-500/20 dark:from-fuchsia-400/18 dark:via-pink-400/10 dark:to-rose-400/18",
-  },
-  {
-    name: "SolTerminal",
-    type: "DeFi",
-    href: "https://sol-terminal-six.vercel.app/",
-    label: "power user",
-    vibe: "High-signal trading UI without looking like a casino.",
-    line: "Trading terminal with wallet flows, market data, pre-trade analytics, and portfolio views.",
-    stack: ["Next.js", "Solana", "Tailwind"],
-    accent:
-      "from-violet-500/20 via-indigo-500/10 to-sky-500/16 dark:from-violet-400/18 dark:via-indigo-400/10 dark:to-sky-400/16",
-  },
-  {
-    name: "Mathly",
-    type: "Education",
-    href: "https://mathbuddy.ai/",
-    label: "student-first",
-    vibe: "Calm UX, clear paths, no clutter tax on learners.",
-    line: "Math practice platform with adaptive problems, progress tracking, and a clean student UI.",
-    stack: ["Next.js", "TypeScript", "React"],
-    accent:
-      "from-amber-500/18 via-orange-500/10 to-yellow-500/20 dark:from-amber-400/16 dark:via-orange-400/10 dark:to-yellow-400/18",
-  },
-  {
-    name: "AI Comic Creator",
-    type: "AI Creative",
-    href: "https://ai-comic-nextjs.vercel.app/",
-    label: "visual gen",
-    vibe: "Story in, comic out — consistent characters across every panel.",
-    line: "AI-powered comic generation platform that transforms prompts into publication-ready panels with character consistency, panel-level editing, and multiple export formats.",
-    stack: ["Next.js", "TypeScript", "AI", "Vercel"],
-    accent:
-      "from-purple-500/20 via-indigo-500/10 to-violet-500/18 dark:from-purple-400/18 dark:via-indigo-400/10 dark:to-violet-400/16",
-  },
-  {
-    name: "AI Course Creator",
-    type: "EdTech SaaS",
-    href: "https://aicoursecreator.com/",
-    label: "curriculum engine",
-    vibe: "Conversational course design that keeps the whole curriculum in sync.",
-    line: "AI-driven curriculum builder with guided workflows, coherent module networks, real-time editing, and source material uploads for educators.",
-    stack: ["React", "TypeScript", "Node.js", "AI"],
-    accent:
-      "from-teal-500/20 via-emerald-500/10 to-green-500/18 dark:from-teal-400/18 dark:via-emerald-400/10 dark:to-green-400/16",
-  },
-];
-
-const otherWork = [
-  {
-    name: "Avelia",
-    type: "UI Experiment",
-    href: "https://avelia.vercel.app/",
-    label: "interface lab",
-    vibe: "Layout and motion studies with a focus on clean hierarchy.",
-    line: "Interface exploration with refined typography, spacing, and subtle interaction patterns.",
-    stack: ["Next.js", "TypeScript", "Tailwind"],
-    accent:
-      "from-rose-500/18 via-orange-500/8 to-amber-500/16 dark:from-rose-400/16 dark:via-orange-400/8 dark:to-amber-400/16",
-  },
-  {
-    name: "Forgee",
-    type: "UI Experiment",
-    href: "https://forgee-taupe.vercel.app/",
-    label: "component craft",
-    vibe: "Component-first UI with warm tones and deliberate restraint.",
-    line: "Design-forward experiment exploring form layouts, cards, and responsive component systems.",
-    stack: ["Next.js", "React", "Tailwind"],
-    accent:
-      "from-stone-500/18 via-amber-500/8 to-orange-500/14 dark:from-stone-400/16 dark:via-amber-400/8 dark:to-orange-400/14",
-  },
-  {
-    name: "Arche",
-    type: "UI Experiment",
-    href: "https://arche-tau.vercel.app/",
-    label: "visual system",
-    vibe: "Minimal structure, strong type, and calm visual rhythm.",
-    line: "UI prototype built around grid systems, editorial layouts, and polished micro-interactions.",
-    stack: ["Next.js", "TypeScript", "CSS"],
-    accent:
-      "from-slate-500/18 via-zinc-500/8 to-neutral-500/14 dark:from-slate-400/16 dark:via-zinc-400/8 dark:to-neutral-400/14",
-  },
-] as const;
-
-const experience = [
-  {
-    company: "PureSoft Labs OÜ",
-    role: "Software Engineer",
-    type: "",
-    period: "Apr 2026 - Present",
-    place: "Remote, Estonia",
-    line: "Driving full-stack delivery on the core product end to end — shipped a ground-up auth overhaul, cut API response times, and built internal tooling that made deploys faster and way less painful for the whole team.",
-    stack: ["TypeScript", "Node.js", "React", "AWS"],
-  },
-  {
-    company: "Cardinal Web 3",
-    role: "Founding Engineer",
-    type: "",
-    period: "May 2026 - Present",
-    place: "Remote, UAE",
-    line: "Founding engineer building the security layer and smart-contract infra from zero — designed the on-chain monitoring pipeline, wallet integration flows, and a real-time alerting system that catches threats before they hit users.",
-    stack: ["Web3", "Solidity", "TypeScript", "Blockchain"],
-  },
-  {
-    company: "exzyt",
-    role: "Software Engineer",
-    type: "",
-    period: "Oct 2025 - Jun 2026",
-    place: "Remote, UAE",
-    line: "Shipped an M&A deal-room platform end to end — document workflows, granular role-based access, real-time collaboration, and locked-down file sharing that active deal teams now run their live transactions on.",
-    stack: ["Next.js", "TypeScript", "Tailwind", "AWS"],
-  },
-  {
-    company: "Stealth Startup",
-    role: "Software Engineer",
-    type: "",
-    period: "Nov 2025 - May 2026",
-    place: "Remote, South Korea",
-    line: "Owned the commerce engine solo — rebuilt transaction flows to run 3× faster and hunted down the payment-reliability bugs that were silently dropping revenue in production.",
-    stack: ["Next.js", "TypeScript", "Node.js", "PostgreSQL"],
-  },
-  {
-    company: "McKinsey & Company",
-    role: "Forward Program Fellow",
-    type: "",
-    period: "Mar 2025 - Sep 2025",
-    place: "Remote",
-    line: "Handpicked for McKinsey's highly selective Forward Program — sharpened structured problem-solving and executive-level communication, then applied both to real business cases alongside a global cohort.",
-    stack: ["Strategy", "Leadership", "Problem Solving"],
-  },
-  {
-    company: "Minimalisticlearning",
-    role: "UI/UX Developer",
-    type: "",
-    period: "Jan 2025 - Jun 2025",
-    place: "Remote, UK",
-    line: "Rebuilt the student-facing experience from the ground up — shipped a reusable component library, nailed mobile responsiveness, and trimmed page load times to keep learners focused instead of waiting.",
-    stack: ["React", "TypeScript", "Redux", "REST"],
-  },
-  {
-    company: "Datapoint",
-    role: "Back End Developer",
-    type: "",
-    period: "Aug 2024 - Dec 2024",
-    place: "Remote, India",
-    line: "Kept the backend humming — extended Node.js APIs powering auth, partner integrations, and data pipelines, shipped the webhook infrastructure, and tuned queries so the whole system stayed fast under real load.",
-    stack: ["Node.js", "Express", "REST", "Databases"],
-  },
-];
 
 type StackItem = {
   name: string;
@@ -488,16 +297,10 @@ function CompanyLogo({ company }: { company: string }) {
 
 function TimelineExperience({
   experience,
+  lang,
 }: {
-  experience: {
-    company: string;
-    role: string;
-    type: string;
-    period: string;
-    place: string;
-    line: string;
-    stack: string[];
-  }[];
+  experience: ExperienceData[];
+  lang: Language;
 }) {
   const timelineRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -521,8 +324,9 @@ function TimelineExperience({
 
   return (
     <div ref={timelineRef} className="relative mx-auto max-w-4xl">
-      {/* Single clean track line with a blue fill that grows on scroll. */}
-      <div className="absolute left-0 top-0 h-full w-px bg-zinc-200 dark:bg-zinc-800">
+      {/* Single clean track line with a blue fill that grows on scroll.
+          Uses logical `start-0` so it sits on the right edge in RTL (Arabic). */}
+      <div className="absolute start-0 top-0 h-full w-px bg-zinc-200 dark:bg-zinc-800">
         <motion.div
           className="absolute inset-x-0 top-0 w-px origin-top bg-blue-500 dark:bg-blue-400"
           style={{ height: "100%", scaleY: scrollYProgress }}
@@ -535,7 +339,7 @@ function TimelineExperience({
           for it to sit on the line without overlapping the role text. */}
       <motion.div
         aria-hidden
-        className="pointer-events-none absolute left-0 z-20 hidden -translate-x-1/2 justify-center sm:flex"
+        className="pointer-events-none absolute start-0 z-20 hidden -translate-x-1/2 justify-center rtl:translate-x-1/2 sm:flex"
         style={{ top: badgeTop }}
       >
         {/* Soft glow halo so the badge reads as a deliberate focal point. */}
@@ -567,7 +371,12 @@ function TimelineExperience({
       </motion.div>
 
       {experience.map((job, index) => (
-        <TimelineItem key={`${job.company}-${job.period}`} job={job} index={index} />
+        <TimelineItem
+          key={`${job.company}-${job.period}`}
+          job={job}
+          index={index}
+          lang={lang}
+        />
       ))}
     </div>
   );
@@ -596,18 +405,13 @@ const timelinePillVariants = {
 function TimelineItem({
   job,
   index,
+  lang,
 }: {
-  job: {
-    company: string;
-    role: string;
-    type: string;
-    period: string;
-    place: string;
-    line: string;
-    stack: string[];
-  };
+  job: ExperienceData;
   index: number;
+  lang: Language;
 }) {
+  const t = job[lang];
   const itemRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: itemRef,
@@ -617,10 +421,10 @@ function TimelineItem({
   const dotOpacity = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
 
   return (
-    <div ref={itemRef} className="relative pb-20 pl-8 last:pb-0 sm:pb-24">
-      {/* Animated dot */}
+    <div ref={itemRef} className="relative pb-20 ps-8 last:pb-0 sm:pb-24">
+      {/* Animated dot — logical `-start-[5px]` keeps it on the line edge in RTL. */}
       <motion.span
-        className="absolute -left-[5px] top-2 size-2.5 rounded-full bg-blue-500 ring-4 ring-white dark:bg-blue-400 dark:ring-[#0b0d12]"
+        className="absolute -start-[5px] top-2 size-2.5 rounded-full bg-blue-500 ring-4 ring-white dark:bg-blue-400 dark:ring-[#0b0d12]"
         style={{ scale: dotScale, opacity: dotOpacity }}
       />
       {/* Contents pop in once, sequenced: header -> description -> pills. */}
@@ -639,10 +443,10 @@ function TimelineItem({
         >
           <div>
             <h3 className="font-display text-xl font-semibold tracking-[-0.04em] text-zinc-950 dark:text-white">
-              {job.role}
+              {t.role}
             </h3>
             <p className="mt-1 text-sm font-medium text-blue-600 dark:text-blue-400">
-              {job.company} · {job.place}
+              {job.company} · {t.place}
             </p>
           </div>
           <p className="font-mono text-sm text-zinc-500">{job.period}</p>
@@ -651,7 +455,7 @@ function TimelineItem({
           variants={timelineChildVariants}
           className="mt-4 max-w-3xl text-base leading-7 text-zinc-600 dark:text-zinc-400"
         >
-          {job.line}
+          {t.line}
         </motion.p>
         <motion.div
           variants={{
@@ -670,8 +474,6 @@ function TimelineItem({
     </div>
   );
 }
-
-type Project = (typeof projects)[number] | (typeof otherWork)[number];
 
 const PREVIEW_WIDTH = 220;
 const PREVIEW_HEIGHT = 140;
@@ -698,7 +500,14 @@ function clampPreviewPosition(
   };
 }
 
-function ProjectCard({ project }: { project: Project }) {
+function ProjectCard({
+  project,
+  lang,
+}: {
+  project: ProjectData;
+  lang: Language;
+}) {
+  const t = project[lang];
   const cardRef = useRef<HTMLDivElement>(null);
   const [hovered, setHovered] = useState(false);
   const [previewLoaded, setPreviewLoaded] = useState(false);
@@ -767,15 +576,15 @@ function ProjectCard({ project }: { project: Project }) {
             <div className="space-y-3">
               <div className="flex flex-wrap items-center gap-2">
                 <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-zinc-400 dark:text-zinc-500">
-                  {project.type}
+                  {t.type}
                 </span>
-                {"status" in project && project.status ? (
+                {project.status ? (
                   <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500 px-2.5 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.14em] text-white shadow-[0_0_0_1px_rgba(16,185,129,0.35),0_2px_8px_rgba(16,185,129,0.35)] dark:bg-emerald-500 dark:text-white">
                     <span className="relative flex h-2 w-2">
                       <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-80" />
                       <span className="relative inline-flex h-2 w-2 rounded-full bg-white" />
                     </span>
-                    {project.status}
+                    {statusLabel[lang]}
                   </span>
                 ) : null}
               </div>
@@ -785,12 +594,12 @@ function ProjectCard({ project }: { project: Project }) {
             </div>
             <ArrowUpRight
               size={18}
-              className="mt-1 shrink-0 text-zinc-300 transition-all duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-zinc-950 dark:text-zinc-700 dark:group-hover:text-white"
+              className="mt-1 shrink-0 text-zinc-300 transition-all duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-zinc-950 dark:text-zinc-700 dark:group-hover:text-white rtl:-scale-x-100"
             />
           </div>
 
           <p className="mt-3 text-[0.94rem] leading-relaxed text-zinc-500 dark:text-zinc-400">
-            {project.line}
+            {t.line}
           </p>
 
           <div className="mt-auto flex flex-wrap gap-1.5 pt-5">
@@ -973,7 +782,9 @@ function SkillToken({
 }
 
 export default function Home() {
-  const headline = useRotatingText(headlines);
+  const { lang } = useLanguage();
+  const t = heroCopy[lang];
+  const headline = useRotatingText(headlines[lang]);
   const heroRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -1000,7 +811,7 @@ export default function Home() {
               transition={{ duration: 0.55, delay: 0.08 }}
               className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400 sm:text-[11px] sm:tracking-[0.26em]"
             >
-              agentic engineer · web3 builder · product systems
+              {t.eyebrow}
             </motion.p>
 
             <motion.h1
@@ -1009,8 +820,8 @@ export default function Home() {
               transition={{ duration: 0.7, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
               className="font-display mt-5 max-w-5xl text-[2.8rem] font-semibold leading-[0.88] tracking-[-0.07em] text-zinc-950 dark:text-white sm:text-6xl md:text-8xl lg:text-9xl"
             >
-              Mirza builds
-              <span className="block text-zinc-400 dark:text-zinc-600">what ships.</span>
+              {t.titleLead}
+              <span className="block text-zinc-400 dark:text-zinc-600">{t.titleTail}</span>
             </motion.h1>
 
             <motion.div
@@ -1039,7 +850,7 @@ export default function Home() {
               transition={{ duration: 0.55, delay: 0.24 }}
               className="mt-5 max-w-2xl text-pretty text-[0.98rem] leading-7 text-zinc-600 dark:text-zinc-400 sm:mt-7 sm:text-[1.05rem] sm:leading-8 md:text-lg"
             >
-              I build the product layer, the backend layer, and the messy middle. Agents help me move fast; taste and review keep it clean.
+              {t.intro}
             </motion.p>
 
             <motion.div
@@ -1056,16 +867,16 @@ export default function Home() {
                   size={15}
                   className="group-hover:animate-icon-lift"
                 />
-                Let&apos;s talk
+                {t.talk}
               </a>
               <a
                 href="#projects"
                 className="font-display group inline-flex items-center justify-center gap-1.5 rounded-full border border-zinc-300 bg-white px-3.5 py-2 text-[0.8rem] font-semibold tracking-[-0.03em] text-zinc-950 transition hover:-translate-y-0.5 hover:border-zinc-950 dark:border-zinc-800 dark:bg-zinc-950 dark:text-white dark:hover:border-zinc-500"
               >
-                See the work
+                {t.seeWork}
                 <ArrowUpRight
                   size={14}
-                  className="group-hover:animate-icon-arrow"
+                  className="group-hover:animate-icon-arrow rtl:-scale-x-100"
                 />
               </a>
               <a
@@ -1077,11 +888,11 @@ export default function Home() {
                   size={14}
                   className="group-hover:animate-icon-download"
                 />
-                Download CV
+                {t.downloadCv}
               </a>
               <span className="hidden h-5 w-px bg-zinc-300 dark:bg-zinc-700 sm:block" />
               <span className="font-mono text-[11px] font-medium uppercase tracking-[0.12em] text-zinc-400 dark:text-zinc-500">
-                open to work · remote
+                {t.openToWork}
               </span>
             </motion.div>
           </div>
@@ -1091,13 +902,13 @@ export default function Home() {
       <section id="about" className="px-4 py-14 sm:px-6 md:py-24">
         <FadeIn className="mx-auto max-w-3xl text-center">
           <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.24em] text-blue-600 dark:text-blue-400">
-            about
+            {aboutCopy[lang].label}
           </p>
           <h2 className="font-display mt-3 text-balance text-2xl font-semibold tracking-[-0.04em] text-zinc-950 dark:text-white sm:text-3xl md:text-4xl">
-            Ships fast. Breaks nothing.
+            {aboutCopy[lang].title}
           </h2>
           <p className="mx-auto mt-5 max-w-2xl text-pretty text-base leading-7 text-zinc-600 dark:text-zinc-400 sm:text-lg sm:leading-8">
-            Full-stack engineer building SaaS, Web3 tools, and AI products with remote teams across the globe. I own features end-to-end, from schema to pixel, and let agentic workflows handle the grunt work so I can focus on what actually ships.
+            {aboutCopy[lang].copy}
           </p>
         </FadeIn>
       </section>
@@ -1105,27 +916,27 @@ export default function Home() {
       <section id="projects" className="px-4 py-14 sm:px-6 md:py-28">
         <div className="mx-auto max-w-6xl">
           <SectionTitle
-            label="selected work"
-            title="Things I've built."
-            copy="Live products, real users, real code. Each with its own stack and design direction."
+            label={sectionCopy[lang].projects.label}
+            title={sectionCopy[lang].projects.title}
+            copy={sectionCopy[lang].projects.copy}
           />
 
           <div className="grid gap-3 sm:gap-4 md:grid-cols-2">
             {projects.map((project, index) => (
               <FadeIn key={project.name} delay={index * 0.03}>
-                <ProjectCard project={project} />
+                <ProjectCard project={project} lang={lang} />
               </FadeIn>
             ))}
           </div>
 
           <FadeIn className="mt-10">
             <p className="mb-4 text-center text-sm font-medium text-zinc-400 dark:text-zinc-500">
-              Other experiments &amp; UI work
+              {sectionCopy[lang].otherWork}
             </p>
             <div className="grid gap-3 sm:gap-4 md:grid-cols-2">
               {otherWork.map((project, index) => (
                 <FadeIn key={project.name} delay={index * 0.03}>
-                  <ProjectCard project={project} />
+                  <ProjectCard project={project} lang={lang} />
                 </FadeIn>
               ))}
             </div>
@@ -1136,19 +947,19 @@ export default function Home() {
       <section id="experience" className="px-4 py-14 sm:px-6 md:py-28">
         <div className="mx-auto max-w-6xl">
           <SectionTitle
-            label="timeline"
-            title="Where I have shipped."
+            label={sectionCopy[lang].experience.label}
+            title={sectionCopy[lang].experience.title}
           />
 
-          <TimelineExperience experience={experience} />
+          <TimelineExperience experience={experience} lang={lang} />
         </div>
       </section>
 
       <section id="stack" className="px-4 py-14 sm:px-6 md:py-28">
         <div className="mx-auto max-w-4xl">
           <SectionTitle
-            label="toolbox"
-            title="What I work with."
+            label={sectionCopy[lang].stack.label}
+            title={sectionCopy[lang].stack.title}
           />
 
           <FadeIn>
@@ -1187,18 +998,18 @@ export default function Home() {
         <FadeIn>
           <div className="mx-auto max-w-3xl text-center">
             <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.24em] text-blue-600 dark:text-blue-400">
-              let&apos;s work together
+              {sectionCopy[lang].contact.label}
             </p>
             <h2 className="font-display mt-4 text-balance text-3xl font-semibold tracking-[-0.04em] text-zinc-950 dark:text-white sm:text-4xl md:text-5xl">
-              Got something to build?
+              {sectionCopy[lang].contact.title}
             </h2>
             <p className="mx-auto mt-4 max-w-lg text-base leading-7 text-zinc-500 dark:text-zinc-400">
-              I work best with small teams shipping fast on messy, real-world problems. If that sounds like yours — say hi.
+              {sectionCopy[lang].contact.copy}
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a
                 href={`mailto:${profile.email}`}
-                aria-label="Email me"
+                aria-label={sectionCopy[lang].contact.emailAria}
                 className="group inline-flex size-11 items-center justify-center rounded-full bg-zinc-950 text-white transition hover:-translate-y-0.5 hover:bg-zinc-800 dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-200"
               >
                 <Mail size={19} className="group-hover:animate-icon-lift" />

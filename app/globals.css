@@ -67,3 +67,60 @@ html {
 .text-pretty {
   text-wrap: pretty;
 }
+
+/* ---- Smooth theme + language transitions -------------------------------- */
+
+/* Ease the page's own surface + text colors when the theme flips, so the
+   background/foreground glide instead of snapping. Kept to the root surfaces
+   only so it never overrides the tuned per-element hover transitions. */
+html,
+body,
+main,
+footer {
+  transition-property: color, background-color;
+  transition-duration: 350ms;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Content gets a brief fade when the language flips (class toggled by the
+   language provider) — a smooth cross-fade without remounting anything. */
+main,
+footer {
+  transition:
+    opacity 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    color 350ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 350ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.lang-fading main,
+.lang-fading footer {
+  opacity: 0.35;
+}
+
+/* ---- Arabic / RTL ------------------------------------------------------- */
+
+/* When the document flips to Arabic, prefer the Arabic-capable font for both
+   body and display text, falling back to the Latin faces for any inline
+   Latin (brand names, tech stacks). Latin fonts have no Arabic glyphs, so
+   without this the browser would substitute a system fallback. */
+:root[lang="ar"] body {
+  font-family: var(--font-arabic), var(--font-dm-sans), system-ui, sans-serif;
+}
+
+:root[lang="ar"] .font-display {
+  font-family: var(--font-arabic), var(--font-space-grotesk), system-ui, sans-serif;
+  /* Arabic script has no meaningful negative tracking — reset the tight
+     Latin letter-spacing so headings don't look cramped. */
+  letter-spacing: normal !important;
+}
+
+/* Keep monospaced Latin metadata (dates, uppercase eyebrows) in the mono
+   face; Arabic glyphs within still resolve via the fallback. */
+:root[lang="ar"] .font-mono {
+  font-family: var(--font-geist-mono), var(--font-arabic), monospace;
+}
+
+/* Arabic numerals within Latin-tracked mono labels read fine, but drop the
+   wide uppercase tracking that only suits Latin capitals. */
+:root[lang="ar"] .font-mono {
+  letter-spacing: 0.04em;
+}
