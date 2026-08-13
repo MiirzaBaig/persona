@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import StatsSection from "@/components/stats-section";
 import {
   AnimatePresence,
   motion,
@@ -912,6 +913,8 @@ export default function Home() {
           </p>
         </FadeIn>
       </section>
+
+      <StatsSection />
 
       <section id="projects" className="px-4 py-14 sm:px-6 md:py-28">
         <div className="mx-auto max-w-6xl">
