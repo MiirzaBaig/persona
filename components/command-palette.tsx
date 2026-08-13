@@ -102,7 +102,7 @@ export default function CommandPalette() {
       },
       {
         id: "language",
-        label: lang === "en" ? t.switchLang : t.switchLang,
+        label: t.switchLang,
         icon: Globe2,
         action: () => {
           setLang(lang === "en" ? "ar" : "en");

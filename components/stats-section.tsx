@@ -20,7 +20,6 @@ function AnimatedCounter({
 
   useEffect(() => {
     if (!startCounting) return;
-    let start = 0;
     const startTime = performance.now();
 
     const step = (now: number) => {
