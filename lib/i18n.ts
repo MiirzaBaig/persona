@@ -197,6 +197,7 @@ export type Project = {
   accent: string;
   status?: boolean; // whether to show the live "In progress" badge
   previewImage?: string;
+  building?: boolean; // no live site yet — card doesn't navigate, preview shows a placeholder
 } & Localized<ProjectContent>;
 
 export const statusLabel: Localized<string> = {
@@ -206,30 +207,52 @@ export const statusLabel: Localized<string> = {
 
 export const projects: Project[] = [
   {
-    name: "Revise",
-    href: "https://revise.example.com",
+    name: "FitCheck",
+    href: "#projects",
     status: true,
-    stack: ["Next.js", "TypeScript", "RAG", "Vector DB"],
+    building: true,
+    previewImage: "/previews/ai-outfit-generator.png",
+    stack: ["Vite", "React", "SSE Streaming", "Agent API", "AI Try-on", "Tailwind"],
+    accent:
+      "from-rose-500/20 via-fuchsia-500/10 to-amber-500/18 dark:from-rose-400/18 dark:via-fuchsia-400/10 dark:to-amber-400/16",
+    en: {
+      type: "AI Stylist",
+      label: "vibe-first",
+      vibe: "Drop a fit. We'll cook — your closet, but it talks back.",
+      line: "Chat-native AI stylist: streams outfit cards over SSE, reads your closet + reference photo, plans the week, does virtual try-on. A fashion OS, not a wardrobe spreadsheet.",
+    },
+    ar: {
+      type: "مصمّم أزياء ذكي",
+      label: "الذوق أولًا",
+      vibe: "اعرض إطلالتك، وسنتكفّل بالباقي — خزانتك، لكنّها تردّ عليك.",
+      line: "مصمّم أزياء ذكي يعمل بالمحادثة: يبثّ بطاقات الإطلالات عبر SSE، ويقرأ خزانتك وصورتك المرجعية، ويخطّط أسبوعك، ويجرّب الملابس افتراضيًا. نظام أزياء متكامل، لا مجرّد جدول للخزانة.",
+    },
+  },
+  {
+    name: "AI Document Editor",
+    href: "https://aidocumenteditor.com/",
+    previewImage: "/previews/revise.png",
+    stack: ["Next.js 15", "TypeScript", "AI Copilot", "Diff Engine", "Streaming", "Postgres"],
     accent:
       "from-indigo-500/20 via-blue-500/10 to-slate-500/18 dark:from-indigo-400/18 dark:via-blue-400/10 dark:to-slate-400/16",
     en: {
-      type: "AI Document Editor",
-      label: "retrieval core",
+      type: "AI Copilot",
+      label: "approval-first",
       vibe: "Every edit deserves your approval — nothing moves without it.",
-      line: "AI document platform for retrieval-heavy workflows — reads long documents, discusses them in context, and proposes changes as tracked, reviewable edits with full revision history.",
+      line: "Doc-aware AI copilot that ships edits as reviewable inline diffs — accept/reject each one, full version history, 9+ formats. No silent rewrites.",
     },
     ar: {
-      type: "محرّر مستندات بالذكاء الاصطناعي",
-      label: "نواة الاسترجاع",
+      type: "مساعد ذكي",
+      label: "الموافقة أولًا",
       vibe: "كل تعديل يستحق موافقتك — لا شيء يتحرّك دونها.",
-      line: "منصّة مستندات بالذكاء الاصطناعي لسير العمل كثيف الاسترجاع — تقرأ المستندات الطويلة، وتناقشها ضمن سياقها، وتقترح التغييرات على شكل تعديلات متتبَّعة قابلة للمراجعة مع سجلّ مراجعات كامل.",
+      line: "مساعد ذكي يفهم المستند ويقدّم التعديلات كفروقات مضمّنة قابلة للمراجعة — تقبل أو ترفض كلًّا منها، مع سجلّ مراجعات كامل و٩+ صيغ. لا تعديلات صامتة.",
     },
   },
   {
     name: "aithesiswriter.io",
     href: "https://aithesiswriter.io",
     previewImage: "/previews/aithesiswriter.png",
-    stack: ["Next.js", "TypeScript", "Stripe", "Supabase"],
+    stack: ["Next.js", "TypeScript", "Stripe", "Supabase", "OpenAI", "i18n"],
     accent:
       "from-sky-500/20 via-blue-500/10 to-cyan-500/20 dark:from-sky-400/18 dark:via-blue-400/10 dark:to-cyan-400/18",
     en: {
@@ -248,7 +271,7 @@ export const projects: Project[] = [
   {
     name: "Tokamak Chain Monitor",
     href: "https://tokamak-chain-monitor.vercel.app/chains",
-    stack: ["Next.js 15", "Viem", "TanStack Query", "Tailwind"],
+    stack: ["Next.js 15", "Viem", "TanStack Query", "Tailwind", "WebSockets", "Recharts"],
     accent:
       "from-emerald-500/18 via-teal-500/8 to-cyan-500/18 dark:from-emerald-400/16 dark:via-teal-400/8 dark:to-cyan-400/16",
     en: {
@@ -268,7 +291,7 @@ export const projects: Project[] = [
     name: "Computer Use Agent",
     href: "https://ai-sdk-computer-use-theta-dun.vercel.app",
     previewImage: "/previews/computer-use-agent.png",
-    stack: ["Next.js", "TypeScript", "Vercel"],
+    stack: ["Next.js", "TypeScript", "AI SDK", "Playwright", "Vercel", "Streaming"],
     accent:
       "from-fuchsia-500/20 via-pink-500/10 to-rose-500/20 dark:from-fuchsia-400/18 dark:via-pink-400/10 dark:to-rose-400/18",
     en: {
@@ -287,7 +310,7 @@ export const projects: Project[] = [
   {
     name: "SolTerminal",
     href: "https://sol-terminal-six.vercel.app/",
-    stack: ["Next.js", "Solana", "Tailwind"],
+    stack: ["Next.js", "Solana", "Web3.js", "Jupiter API", "Tailwind", "WebSockets"],
     accent:
       "from-violet-500/20 via-indigo-500/10 to-sky-500/16 dark:from-violet-400/18 dark:via-indigo-400/10 dark:to-sky-400/16",
     en: {
@@ -306,7 +329,7 @@ export const projects: Project[] = [
   {
     name: "Mathly",
     href: "https://mathbuddy.ai/",
-    stack: ["Next.js", "TypeScript", "React"],
+    stack: ["Next.js", "TypeScript", "React", "Framer Motion", "KaTeX", "Adaptive Engine"],
     accent:
       "from-amber-500/18 via-orange-500/10 to-yellow-500/20 dark:from-amber-400/16 dark:via-orange-400/10 dark:to-yellow-400/18",
     en: {
@@ -325,7 +348,7 @@ export const projects: Project[] = [
   {
     name: "AI Comic Creator",
     href: "https://ai-comic-nextjs.vercel.app/",
-    stack: ["Next.js", "TypeScript", "AI", "Vercel"],
+    stack: ["Next.js", "TypeScript", "Diffusion", "Image Gen", "Vercel", "Edge Fns"],
     accent:
       "from-purple-500/20 via-indigo-500/10 to-violet-500/18 dark:from-purple-400/18 dark:via-indigo-400/10 dark:to-violet-400/16",
     en: {
@@ -344,7 +367,7 @@ export const projects: Project[] = [
   {
     name: "AI Course Creator",
     href: "https://aicoursecreator.com/",
-    stack: ["React", "TypeScript", "Node.js", "AI"],
+    stack: ["React", "TypeScript", "Node.js", "LLM Orchestration", "Postgres", "Real-time"],
     accent:
       "from-teal-500/20 via-emerald-500/10 to-green-500/18 dark:from-teal-400/18 dark:via-emerald-400/10 dark:to-green-400/16",
     en: {
@@ -366,7 +389,7 @@ export const otherWork: Project[] = [
   {
     name: "Avelia",
     href: "https://avelia.vercel.app/",
-    stack: ["Next.js", "TypeScript", "Tailwind"],
+    stack: ["Next.js", "TypeScript", "Tailwind", "Framer Motion", "Radix UI"],
     accent:
       "from-rose-500/18 via-orange-500/8 to-amber-500/16 dark:from-rose-400/16 dark:via-orange-400/8 dark:to-amber-400/16",
     en: {
@@ -385,7 +408,7 @@ export const otherWork: Project[] = [
   {
     name: "Forgee",
     href: "https://forgee-taupe.vercel.app/",
-    stack: ["Next.js", "React", "Tailwind"],
+    stack: ["Next.js", "React", "Tailwind", "shadcn/ui", "React Hook Form"],
     accent:
       "from-stone-500/18 via-amber-500/8 to-orange-500/14 dark:from-stone-400/16 dark:via-amber-400/8 dark:to-orange-400/14",
     en: {
@@ -404,7 +427,7 @@ export const otherWork: Project[] = [
   {
     name: "Arche",
     href: "https://arche-tau.vercel.app/",
-    stack: ["Next.js", "TypeScript", "CSS"],
+    stack: ["Next.js", "TypeScript", "CSS Grid", "GSAP", "Design System"],
     accent:
       "from-slate-500/18 via-zinc-500/8 to-neutral-500/14 dark:from-slate-400/16 dark:via-zinc-400/8 dark:to-neutral-400/14",
     en: {

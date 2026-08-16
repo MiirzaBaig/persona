@@ -565,8 +565,9 @@ function ProjectCard({
     >
       <a
         href={project.href}
-        target="_blank"
-        rel="noopener noreferrer"
+        target={project.building ? undefined : "_blank"}
+        rel={project.building ? undefined : "noopener noreferrer"}
+        aria-disabled={project.building ? true : undefined}
         className="group relative flex h-full min-h-[260px] overflow-hidden rounded-xl border border-zinc-200 bg-white p-5 transition-colors duration-150 ease-out hover:bg-zinc-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[#f8fafc] dark:border-zinc-800 dark:bg-zinc-950 dark:shadow-none dark:hover:bg-zinc-900/80 dark:focus-visible:ring-blue-400 dark:focus-visible:ring-offset-[#08090b] sm:min-h-[280px] sm:p-6"
       >
         <div className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${project.accent} opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100 group-focus-visible:opacity-100`} />
@@ -592,10 +593,12 @@ function ProjectCard({
                 {project.name}
               </h3>
             </div>
-            <ArrowUpRight
-              size={18}
-              className="mt-1 shrink-0 text-zinc-300 transition-all duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-zinc-950 dark:text-zinc-700 dark:group-hover:text-white rtl:-scale-x-100"
-            />
+            {project.building ? null : (
+              <ArrowUpRight
+                size={18}
+                className="mt-1 shrink-0 text-zinc-300 transition-all duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-zinc-950 dark:text-zinc-700 dark:group-hover:text-white rtl:-scale-x-100"
+              />
+            )}
           </div>
 
           <p className="mt-3 text-[0.94rem] leading-relaxed text-zinc-500 dark:text-zinc-400">
@@ -643,6 +646,21 @@ function ProjectCard({
                 height={PREVIEW_HEIGHT}
                 className="h-full w-full object-cover object-top"
               />
+            ) : project.building ? (
+              <div
+                className={`flex h-full w-full flex-col items-center justify-center gap-1.5 bg-gradient-to-br ${project.accent} text-center`}
+              >
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75" />
+                  <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500" />
+                </span>
+                <span className="font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-zinc-700 dark:text-zinc-200">
+                  {statusLabel[lang]}
+                </span>
+                <span className="px-4 text-[10px] leading-tight text-zinc-500 dark:text-zinc-400">
+                  {t.vibe}
+                </span>
+              </div>
             ) : (
               <iframe
                 src={project.href}
