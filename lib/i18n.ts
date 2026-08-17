@@ -231,7 +231,6 @@ export const projects: Project[] = [
   {
     name: "AI Document Editor",
     href: "https://aidocumenteditor.com/",
-    previewImage: "/previews/revise.png",
     stack: ["Next.js 15", "TypeScript", "AI Copilot", "Diff Engine", "Streaming", "Postgres"],
     accent:
       "from-indigo-500/20 via-blue-500/10 to-slate-500/18 dark:from-indigo-400/18 dark:via-blue-400/10 dark:to-slate-400/16",
@@ -269,22 +268,22 @@ export const projects: Project[] = [
     },
   },
   {
-    name: "Tokamak Chain Monitor",
-    href: "https://tokamak-chain-monitor.vercel.app/chains",
-    stack: ["Next.js 15", "Viem", "TanStack Query", "Tailwind", "WebSockets", "Recharts"],
+    name: "AI Book Writer",
+    href: "https://ai-book-nextjs-xi.vercel.app/",
+    stack: ["Next.js", "TypeScript", "LLM Orchestration", "Streaming", "Chapter Engine", "Tailwind"],
     accent:
-      "from-emerald-500/18 via-teal-500/8 to-cyan-500/18 dark:from-emerald-400/16 dark:via-teal-400/8 dark:to-cyan-400/16",
+      "from-teal-500/20 via-emerald-500/10 to-green-500/18 dark:from-teal-400/18 dark:via-emerald-400/10 dark:to-green-400/16",
     en: {
-      type: "Observability",
-      label: "ops core",
-      vibe: "Dense data, fast scanning, zero dashboard soup.",
-      line: "L2 monitoring dashboard with live chain health, fee trends, fallback RPCs, and PDF reporting.",
+      type: "AI Authoring",
+      label: "manuscript engine",
+      vibe: "From a one-line idea to a full manuscript — chapter by chapter.",
+      line: "AI book-writing studio that turns a premise into a structured outline, then drafts each chapter with streaming generation, consistent voice and characters, inline rewriting, and clean export.",
     },
     ar: {
-      type: "مراقبة وتتبّع",
-      label: "نواة التشغيل",
-      vibe: "بياناتٌ كثيفة، ومسحٌ سريع، ودون فوضى في اللوحات.",
-      line: "لوحة مراقبة لشبكات الطبقة الثانية مع حالة الشبكة الحيّة، واتجاهات الرسوم، وخوادم RPC احتياطية، وتقارير PDF.",
+      type: "تأليف بالذكاء الاصطناعي",
+      label: "محرّك المخطوطة",
+      vibe: "من فكرة بسطر واحد إلى مخطوطة كاملة — فصلًا بعد فصل.",
+      line: "استوديو لتأليف الكتب بالذكاء الاصطناعي يحوّل الفكرة إلى مخطط منظّم، ثم يكتب كل فصل ببثٍّ آنيّ، مع اتساق الأسلوب والشخصيات، وتحرير مضمّن، وتصدير نظيف.",
     },
   },
   {
@@ -365,22 +364,22 @@ export const projects: Project[] = [
     },
   },
   {
-    name: "AI Course Creator",
-    href: "https://aicoursecreator.com/",
-    stack: ["React", "TypeScript", "Node.js", "LLM Orchestration", "Postgres", "Real-time"],
+    name: "Tokamak Chain Monitor",
+    href: "https://tokamak-chain-monitor.vercel.app/chains",
+    stack: ["Next.js 15", "Viem", "TanStack Query", "Tailwind", "WebSockets", "Recharts"],
     accent:
-      "from-teal-500/20 via-emerald-500/10 to-green-500/18 dark:from-teal-400/18 dark:via-emerald-400/10 dark:to-green-400/16",
+      "from-emerald-500/18 via-teal-500/8 to-cyan-500/18 dark:from-emerald-400/16 dark:via-teal-400/8 dark:to-cyan-400/16",
     en: {
-      type: "EdTech SaaS",
-      label: "curriculum engine",
-      vibe: "Conversational course design that keeps the whole curriculum in sync.",
-      line: "AI-driven curriculum builder with guided workflows, coherent module networks, real-time editing, and source material uploads for educators.",
+      type: "Observability",
+      label: "ops core",
+      vibe: "Dense data, fast scanning, zero dashboard soup.",
+      line: "L2 monitoring dashboard with live chain health, fee trends, fallback RPCs, and PDF reporting.",
     },
     ar: {
-      type: "منتج SaaS للتقنية التعليمية",
-      label: "محرّك المناهج",
-      vibe: "تصميم مقرّرات حواري يُبقي المنهج كلّه متناغمًا.",
-      line: "أداة لبناء المناهج مدعومة بالذكاء الاصطناعي مع سير عمل موجَّه، وشبكات وحدات متماسكة، وتحرير آنيّ، ورفع للمواد المصدرية للمعلّمين.",
+      type: "مراقبة وتتبّع",
+      label: "نواة التشغيل",
+      vibe: "بياناتٌ كثيفة، ومسحٌ سريع، ودون فوضى في اللوحات.",
+      line: "لوحة مراقبة لشبكات الطبقة الثانية مع حالة الشبكة الحيّة، واتجاهات الرسوم، وخوادم RPC احتياطية، وتقارير PDF.",
     },
   },
 ];
