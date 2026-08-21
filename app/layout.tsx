@@ -8,6 +8,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { LanguageProvider } from "@/components/language-provider";
 import { Analytics } from "@vercel/analytics/react"
 import LenisProvider from "@/components/lenis-provider";
+import GlobalFeatures from "@/components/global-features";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -56,6 +57,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Nav />
             {children}
             <Footer />
+            <GlobalFeatures />
             <Analytics />
           </LanguageProvider>
         </ThemeProvider>
