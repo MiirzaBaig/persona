@@ -563,3 +563,75 @@ export const experience: Experience[] = [
     },
   },
 ];
+
+// ---------------------------------------------------------------------------
+// Stats section
+// ---------------------------------------------------------------------------
+
+type StatItem = { value: number; suffix: string; label: string };
+
+export const stats: Localized<StatItem[]> = {
+  en: [
+    { value: 3, suffix: "+", label: "Years of Experience" },
+    { value: 8, suffix: "+", label: "Projects Shipped" },
+    { value: 7, suffix: "+", label: "Companies Worked With" },
+    { value: 5, suffix: "", label: "Tech Stacks Mastered" },
+  ],
+  ar: [
+    { value: 3, suffix: "+", label: "سنوات من الخبرة" },
+    { value: 8, suffix: "+", label: "مشاريع مُطلَقة" },
+    { value: 7, suffix: "+", label: "شركات عملتُ معها" },
+    { value: 5, suffix: "", label: "أدوات تقنية مُتقَنة" },
+  ],
+};
+
+// ---------------------------------------------------------------------------
+// Command palette
+// ---------------------------------------------------------------------------
+
+export const commandPalette: Localized<{
+  placeholder: string;
+  about: string;
+  projects: string;
+  experience: string;
+  stack: string;
+  contact: string;
+  downloadCv: string;
+  lightMode: string;
+  darkMode: string;
+  switchLang: string;
+  noResults: string;
+  navigate: string;
+  select: string;
+}> = {
+  en: {
+    placeholder: "Search or jump to…",
+    about: "Go to About",
+    projects: "Go to Projects",
+    experience: "Go to Timeline",
+    stack: "Go to Stack",
+    contact: "Go to Contact",
+    downloadCv: "Download CV",
+    lightMode: "Switch to light mode",
+    darkMode: "Switch to dark mode",
+    switchLang: "Switch to العربية",
+    noResults: "No results found.",
+    navigate: "navigate",
+    select: "select",
+  },
+  ar: {
+    placeholder: "ابحث أو انتقل إلى…",
+    about: "انتقل إلى نبذة",
+    projects: "انتقل إلى الأعمال",
+    experience: "انتقل إلى المسيرة",
+    stack: "انتقل إلى الأدوات",
+    contact: "انتقل إلى التواصل",
+    downloadCv: "تحميل السيرة الذاتية",
+    lightMode: "التبديل إلى الوضع الفاتح",
+    darkMode: "التبديل إلى الوضع الداكن",
+    switchLang: "Switch to English",
+    noResults: "لا توجد نتائج.",
+    navigate: "التنقّل",
+    select: "اختيار",
+  },
+};
