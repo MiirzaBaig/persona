@@ -179,9 +179,22 @@ export const nav: Localized<{
   },
 };
 
-export const footer: Localized<{ tagline: string }> = {
-  en: { tagline: "still shipping." },
-  ar: { tagline: "ما زلتُ أشحَن." },
+export const footer: Localized<{
+  tagline: string;
+  visitFirst: string;
+  // {count} is replaced with the visit number (e.g. "your 3rd time here")
+  visitReturn: string;
+}> = {
+  en: {
+    tagline: "still shipping.",
+    visitFirst: "first time here — welcome.",
+    visitReturn: "your {count} time here.",
+  },
+  ar: {
+    tagline: "ما زلتُ أشحَن.",
+    visitFirst: "زيارتك الأولى — أهلاً بك.",
+    visitReturn: "زيارتك رقم {count} هنا.",
+  },
 };
 
 // ---------------------------------------------------------------------------
