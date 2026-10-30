@@ -471,33 +471,33 @@ export type Experience = {
 
 export const experience: Experience[] = [
   {
-    company: "PureSoft Labs OÜ",
+    company: "Confidential (Freelance)",
     period: "Apr 2026 - Present",
     stack: ["TypeScript", "Node.js", "React", "AWS"],
     en: {
-      role: "Software Engineer",
-      place: "Remote, Estonia",
+      role: "Full-Stack AI Engineer",
+      place: "Remote",
       line: "Driving full-stack delivery on the core product end to end — shipped a ground-up auth overhaul, cut API response times, and built internal tooling that made deploys faster and way less painful for the whole team.",
     },
     ar: {
-      role: "مهندس برمجيات",
-      place: "عن بُعد، إستونيا",
+      role: "مهندس ذكاء اصطناعي Full-Stack",
+      place: "عن بُعد",
       line: "أقود تسليم المنتج الأساسي بشكل متكامل من طرفه إلى طرفه — أطلقتُ إعادة بناء كاملة لنظام المصادقة، وقلّصتُ أزمنة استجابة الواجهات البرمجية، وبنيتُ أدوات داخلية جعلت عمليات النشر أسرع وأقلّ إرهاقًا للفريق بأكمله.",
     },
   },
   {
     company: "Cardinal Web 3",
-    period: "May 2026 - Present",
+    period: "May 2026 - Jul 2026",
     stack: ["Web3", "Solidity", "TypeScript", "Blockchain"],
     en: {
-      role: "Founding Engineer",
+      role: "Founding AI Engineer",
       place: "Remote, UAE",
-      line: "Founding engineer building the security layer and smart-contract infra from zero — designed the on-chain monitoring pipeline, wallet integration flows, and a real-time alerting system that catches threats before they hit users.",
+      line: "As founding AI engineer, built the security layer and smart-contract infra from zero — designed the on-chain monitoring pipeline, wallet integration flows, and a real-time alerting system that catches threats before they hit users.",
     },
     ar: {
-      role: "مهندس مؤسِّس",
+      role: "مهندس ذكاء اصطناعي مؤسِّس",
       place: "عن بُعد، الإمارات",
-      line: "مهندس مؤسِّس يبني طبقة الأمان والبنية التحتية للعقود الذكية من الصفر — صمّمتُ خطّ مراقبة السلسلة، وتدفّقات دمج المحافظ، ونظام تنبيهات آنيّ يلتقط التهديدات قبل أن تصل إلى المستخدمين.",
+      line: "بصفتي مهندس ذكاء اصطناعي مؤسِّسًا، بنيتُ طبقة الأمان والبنية التحتية للعقود الذكية من الصفر — صمّمتُ خطّ مراقبة السلسلة، وتدفّقات دمج المحافظ، ونظام تنبيهات آنيّ يلتقط التهديدات قبل أن تصل إلى المستخدمين.",
     },
   },
   {
@@ -505,12 +505,12 @@ export const experience: Experience[] = [
     period: "Oct 2025 - Jun 2026",
     stack: ["Next.js", "TypeScript", "Tailwind", "AWS"],
     en: {
-      role: "Software Engineer",
+      role: "Founding Engineer",
       place: "Remote, UAE",
       line: "Shipped an M&A deal-room platform end to end — document workflows, granular role-based access, real-time collaboration, and locked-down file sharing that active deal teams now run their live transactions on.",
     },
     ar: {
-      role: "مهندس برمجيات",
+      role: "مهندس مؤسِّس",
       place: "عن بُعد، الإمارات",
       line: "أطلقتُ منصّة غرفة صفقات لعمليات الدمج والاستحواذ بشكل متكامل — سير عمل للمستندات، وصلاحيات دقيقة قائمة على الأدوار، وتعاون آنيّ، ومشاركة ملفات محكمة تُدير عليها فرق الصفقات معاملاتها الحيّة الآن.",
     },

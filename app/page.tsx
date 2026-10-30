@@ -244,14 +244,11 @@ const WORDMARK_LOGOS = new Set<string>(["Datapoint"]);
 const FILL_CONTAIN_LOGOS = new Set<string>([
   "Cardinal Web 3",
   "Stealth Startup",
-  "PureSoft Labs OÜ",
 ]);
 
 // Real brand icons via Google's favicon CDN (token-free) for companies with a
 // public site; anything without a local SVG or domain falls back to a monogram.
-const COMPANY_DOMAINS: Record<string, string> = {
-  "PureSoft Labs OÜ": "plou.eu",
-};
+const COMPANY_DOMAINS: Record<string, string> = {};
 
 function faviconUrl(domain: string) {
   return `https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
